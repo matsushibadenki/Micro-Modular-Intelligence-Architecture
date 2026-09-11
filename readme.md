@@ -1,6 +1,6 @@
 # Micro Modular Intelligence Architecture（MMIA）
 
-**マイクロモデルの専門化・動的連携・知識記憶による、AIの学習・推論コスト削減に関する研究。**
+**マイクロモデルの専門化・動的連携・知識記憶・動的階層形成による、AIの学習・推論コスト削減に関する研究。**
 
 [日本語](#日本語) · [English](#english) · [简体中文](#简体中文)
 
@@ -30,6 +30,7 @@
 | Parametric Memory | 人工的な事実をAdapterへ学習させ、RAGと精度・遅延・文脈長・学習費用を比較する |
 | 知識更新 | 事実の変更・追加に対する更新時間、古い回答の残存、無関係な知識の忘却を測る |
 | Shared Workspace | 小さな共有潜在メモリを介した連携が、追加計算に見合う改善を生むかを検証する |
+| 動的階層形成 | 安定したMicroMoEの連携を検出し、マクロ化・蒸留・上位モジュールへの昇格と降格によって計算構造を再編する |
 | 拡張性 | モジュールの階層化、SSDからの読み込み、キャッシュ、独立モデル間通信を段階的に検討する |
 
 ### 主要な研究仮説
@@ -37,8 +38,27 @@
 1. **専門化の効果**：共有Coreと専門Adapterの組み合わせは、単一LoRAやDenseモデルより、品質とコストの関係を改善できるか。
 2. **連携方式の効果**：自己活性や複数Adapterの合成は、中央Routerによる選択より有利になるか。
 3. **知識記憶の効果**：安定した知識では、Parametric MemoryがRAGに近い品質を維持し、学習・更新費用を含めても安くなるか。
+4. **動的階層形成の効果**：繰り返されるMicroModel群の連携を上位モジュールへ昇格させることで、蒸留・管理・フォールバック費用を含めても総コストを削減できるか。
 
 これらは検証前の仮説です。RAGの完全置換は目的とせず、検索と重みへの記憶を使い分ける条件も調べます。
+
+### 動的階層形成：Dynamic Hierarchical Module Formation
+
+MicroModelのネットワークからMicroMoEを形成し、安定した役割分担や処理パターンを再利用可能な上位モジュールへ昇格させます。**経験から計算構造そのものを整理する仕組み**を研究の中心テーマの一つとして扱います。
+
+```text
+連携履歴 → 構造検出 → マクロ化 → 蒸留 → 上位モジュール化
+                          ↑                    │
+                          └── 降格・再展開 ────┘
+```
+
+例えば `Physics → Math → Logic` が安定して使われる場合、まず下位モジュールを呼び出す仮想マクロとして登録します。その後、処理結果を教師として上位モジュールXへ蒸留し、品質を維持して計算を短縮できるかを測ります。マクロ化だけでは下位の計算は消えず、蒸留後も呼び出し回数の減少だけで高速化を判断しません。
+
+昇格候補は共起頻度だけでなく、性能寄与、計算削減、再利用率、干渉率から評価します。下位モジュールは保持し、低信頼・例外・未知問題では元の経路へ展開します。利用減少、精度低下、処理パターン変化に応じた降格も検証し、`merge / split / promote / demote` を区別して扱います。
+
+階層例は `primitive MicroModels → learned MicroMoE → reusable functional modules → abstract reasoning modules → task/domain systems` です。下位は具体的知識、中位は処理パターン、上位は抽象的関係を学ぶ分担を仮説とします。上位ほど大きくする必要はなく、容量と階層深度に上限を設けます。この流れを作業上 **Hierarchical Neural Compilation** と呼びますが、名称の新規性や効果は未検証です。
+
+詳細は[動的階層形成の研究設計](docs/dynamic-hierarchical-module-formation.md)を参照してください。
 
 ### 研究の進め方
 
@@ -52,9 +72,11 @@
 
 - [Done] 研究設計書と文献調査に基づく研究レビューを文書化。
 - [Done] 比較実験、コストモデル、採否基準、ロードマップを整理。
+- [Done] 動的階層形成・昇格・蒸留・降格の研究テーマと検証計画を文書化。
 - [Next] モデル・実行環境・評価条件を確定し、最小評価基盤を実装。
 - [Next] 混合単一LoRAと専門LoRA群の比較実験。
 - [Later] 動的連携、知識記憶・更新、Workspace、階層化、SSD配信、独立モデル間通信。
+- [Later] 連携履歴に基づくマクロ化、上位モジュールへの蒸留、フォールバックと降格の比較実験。
 
 現在は研究設計・文献調査の段階です。[Done]は文書整備の完了を示し、モデル実装や性能実証の完了を意味しません。学習・推論実験は未実施で、コスト削減効果は未検証です。
 
@@ -62,13 +84,14 @@
 
 - [研究設計書](docs/Micro-Modular-Intelligence-Architecture.md)：全体構想と研究仮説。
 - [研究レビュー](docs/research-review-2026-09-11.md)：先行研究の出典、設計課題、コストモデル、実験計画。
+- [動的階層形成の研究設計](docs/dynamic-hierarchical-module-formation.md)：MicroMoEの構造検出・昇格・蒸留・降格。
 - [ロードマップ](docs/ROADMAP.md)：実装・検証の優先順位と完了条件。
 
 ## English
 
 ### Research theme
 
-MMIA investigates whether specialization, dynamic composition, and knowledge memory in small modules can reduce the total cost of AI training and inference while maintaining answer quality.
+MMIA investigates whether specialization, dynamic composition, knowledge memory, and dynamic hierarchy formation in small modules can reduce the total cost of AI training and inference while maintaining answer quality.
 
 The initial architecture uses a **shared small backbone with specialized LoRA adapters**, rather than independent small language models. Shared latent communication and independent models are later research stages.
 
@@ -88,6 +111,7 @@ Reducing trainable parameters does not automatically reduce backbone inference c
 | Parametric memory | Compare adapter-based synthetic knowledge with RAG in quality, latency, context length, and preparation cost |
 | Knowledge updates | Measure update cost, stale answers, and forgetting of unaffected facts |
 | Shared workspace | Test whether latent communication provides gains beyond its additional capacity and computation |
+| Dynamic hierarchy formation | Detect stable MicroMoE cooperation patterns, promote them through macros and distillation, and evaluate demotion and expansion |
 | Scaling | Investigate hierarchy, SSD loading, caching, and communication between independent models in later stages |
 
 ### Hypotheses and method
@@ -98,11 +122,25 @@ Start with a reproducible evaluation harness and a candidate backbone in the 0.5
 
 Use synthetic knowledge and held-out questions, with grouped splits to prevent leakage. Evaluate English, Japanese, and Simplified Chinese separately. Measure quality, training time, inference computation, time to first token, completion latency, peak memory, and update costs; report energy only when measured. Compare total cost at a predefined quality requirement, including retrieval, routing, loading, and retries.
 
+### Dynamic Hierarchical Module Formation
+
+A fourth hypothesis asks whether reusable cooperation patterns can be promoted into higher modules at lower total cost, including distillation, management, and fallback. This is a central research theme: reorganizing computation through experience.
+
+The proposed stages are **pattern discovery → virtual macro → distillation → reusable higher module**. A macro still invokes its original modules; distillation attempts to replace that computation with a learned module. Promotion requires measured quality and savings, not just frequent co-occurrence or fewer calls.
+
+Keep the lower modules available for low-confidence, exceptional, or unfamiliar inputs. Evaluate demotion when usage declines, quality deteriorates, or patterns change. Distinguish merge, split, promote, and demote, with capacity and depth limits to avoid uncontrolled growth.
+
+An illustrative hierarchy is primitive MicroModels → learned MicroMoE → reusable functional modules → abstract reasoning modules → task/domain systems. Lower levels may learn concrete knowledge, middle levels processing patterns, and upper levels abstract relations; this division is a hypothesis, and higher modules need not be larger. We use **Hierarchical Neural Compilation** as a working name, without claiming established novelty or effectiveness.
+
+See the [detailed research proposal](docs/dynamic-hierarchical-module-formation.md). Implementation follows baseline evaluation and collection of cooperation traces.
+
 ### Status and documents
 
 - [Done] Research design, literature review, cost model, experiment proposals, and roadmap documented.
+- [Done] Dynamic hierarchy formation, promotion, distillation, and demotion proposal documented.
 - [Next] Select the pilot configuration and implement the evaluation harness; compare mixed-task and specialist adapters.
 - [Later] Dynamic coordination, knowledge memory and updates, workspace, hierarchy, SSD delivery, and independent models.
+- [Later] Trace-based macros, distilled higher modules, fallback, and demotion experiments.
 
 No model training or inference experiments have been run. Completed items refer to documentation; cost reductions have not been demonstrated.
 
@@ -112,7 +150,7 @@ See the [architecture design](docs/Micro-Modular-Intelligence-Architecture.md), 
 
 ### 研究主题
 
-MMIA研究如何通过小型模块的专业化、动态组合与知识记忆，在保持回答质量的同时，降低AI训练、推理和知识更新的总成本。
+MMIA研究如何通过小型模块的专业化、动态组合、知识记忆与动态层次形成，在保持回答质量的同时，降低AI训练、推理和知识更新的总成本。
 
 初期采用**共享小型主干模型与专业LoRA适配器**，而不是多个独立的小型语言模型。共享潜在空间通信与独立模型之间的协作属于后续研究阶段。
 
@@ -132,6 +170,7 @@ MMIA研究如何通过小型模块的专业化、动态组合与知识记忆，�
 | 参数化记忆 | 将适配器中的人工知识与RAG比较，评估质量、延迟、上下文长度及准备成本 |
 | 知识更新 | 测量更新成本、旧答案残留，以及未修改知识的遗忘 |
 | 共享工作空间 | 检验潜在空间通信带来的收益是否超过额外容量与计算的作用 |
+| 动态层次形成 | 检测稳定的MicroMoE协作模式，通过宏封装与蒸馏晋升为上层模块，并验证降级与展开 |
 | 扩展性 | 分阶段研究层次结构、SSD加载、缓存及独立模型之间的通信 |
 
 ### 研究假设与方法
@@ -142,11 +181,25 @@ MMIA研究如何通过小型模块的专业化、动态组合与知识记忆，�
 
 使用人工知识和未见问题，通过分组划分避免数据泄漏。分别评估英语、日语和简体中文。记录质量、训练时间、推理计算量、首token延迟、完整回答延迟、峰值内存及更新成本；能实际测量时再报告能耗。在预先规定的质量要求下，比较包含检索、路由、加载和重试的总成本。
 
+### 动态层次形成：Dynamic Hierarchical Module Formation
+
+第四个假设是：将可复用的协作模式晋升为上层模块后，能否在包含蒸馏、管理和回退开销的条件下减少总成本。**通过经验整理计算结构本身**是本研究的核心主题之一。
+
+计划流程为 **模式发现 → 虚拟宏 → 蒸馏 → 可复用上层模块**。宏封装仍调用原有下层模块；蒸馏则尝试用学到的新模块替代这些计算。晋升需验证质量与实际节省，不能只依据共现频率或调用次数。
+
+保留下层模块，在低置信度、异常或未知问题上展开原始路径。当使用频率下降、质量退化或协作模式变化时，验证降级机制。区分merge、split、promote与demote，并限制容量及层次深度，防止无控制增长。
+
+层次示例为基础MicroModel → 学习形成的MicroMoE → 可复用功能模块 → 抽象推理模块 → 任务／领域系统。下层学习具体知识、中层学习处理模式、上层学习抽象关系是一项待验证的分工假设；上层模块不一定更大。暂用 **Hierarchical Neural Compilation** 描述这一流程，不预先宣称其新颖性或有效性。
+
+详见[动态层次形成研究设计](docs/dynamic-hierarchical-module-formation.md)。实现将在基础评估与协作轨迹收集之后开展。
+
 ### 当前进度与文档
 
 - [Done] 已形成研究设计、文献评估、成本模型、实验方案和路线图。
+- [Done] 已记录动态层次形成、晋升、蒸馏与降级的研究方案。
 - [Next] 确定试验配置并实现最小评估框架；比较混合任务单适配器与专业适配器。
 - [Later] 动态协作、知识记忆与更新、共享工作空间、层次结构、SSD加载和独立模型通信。
+- [Later] 基于轨迹的宏封装、上层模块蒸馏、回退与降级实验。
 
 目前尚未运行模型训练或推理实验。[Done]表示文档工作已完成，不代表模型实现或性能验证已经完成。成本降低效果仍待验证。
 
