@@ -73,12 +73,15 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [Done] 研究設計書と文献調査に基づく研究レビューを文書化。
 - [Done] 比較実験、コストモデル、採否基準、ロードマップを整理。
 - [Done] 動的階層形成・昇格・蒸留・降格の研究テーマと検証計画を文書化。
-- [Next] モデル・実行環境・評価条件を確定し、最小評価基盤を実装。
+- [Done] 最小評価基盤とMMIA-R001予備実験。CPUで24問を2回実行し、全token・採点の一致と標準generateとの一致を確認。
+- [Next] pilot-v2で真偽ラベル・難易度・未見テンプレートを整備し、専門学習の比較条件を確定。
 - [Next] 混合単一LoRAと専門LoRA群の比較実験。
 - [Later] 動的連携、知識記憶・更新、Workspace、階層化、SSD配信、独立モデル間通信。
 - [Later] 連携履歴に基づくマクロ化、上位モジュールへの蒸留、フォールバックと降格の比較実験。
 
-現在は研究設計・文献調査の段階です。[Done]は文書整備の完了を示し、モデル実装や性能実証の完了を意味しません。学習・推論実験は未実施で、コスト削減効果は未検証です。
+現在は最小評価基盤を実装し、Core単独の推論予備実験まで完了しています。整数のみの採点では5/24問（20.8%）が正解でした。この小規模データは実装確認用で、一般能力の評価には使えません。LoRA学習・RAG比較・昇格機構は未実装で、コスト削減効果は未検証です。
+
+[実行方法](docs/harness-usage.md)と[予備実験結果](docs/experiments/MMIA-R001-results.md)を参照してください。
 
 ### 関連文書
 
@@ -86,6 +89,7 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [研究レビュー](docs/research-review-2026-09-11.md)：先行研究の出典、設計課題、コストモデル、実験計画。
 - [動的階層形成の研究設計](docs/dynamic-hierarchical-module-formation.md)：MicroMoEの構造検出・昇格・蒸留・降格。
 - [ロードマップ](docs/ROADMAP.md)：実装・検証の優先順位と完了条件。
+- [MMIA-R001結果](docs/experiments/MMIA-R001-results.md)：初回のCore評価、再現性検証、失敗記録、次の課題。
 
 ## English
 
@@ -138,11 +142,12 @@ See the [detailed research proposal](docs/dynamic-hierarchical-module-formation.
 
 - [Done] Research design, literature review, cost model, experiment proposals, and roadmap documented.
 - [Done] Dynamic hierarchy formation, promotion, distillation, and demotion proposal documented.
-- [Next] Select the pilot configuration and implement the evaluation harness; compare mixed-task and specialist adapters.
+- [Done] Implemented the pilot harness; two CPU runs matched all 24 token sequences and grades, also matching standard generate.
+- [Next] Improve label balance, difficulty, and held-out templates in pilot-v2 before mixed-task versus specialist training.
 - [Later] Dynamic coordination, knowledge memory and updates, workspace, hierarchy, SSD delivery, and independent models.
 - [Later] Trace-based macros, distilled higher modules, fallback, and demotion experiments.
 
-No model training or inference experiments have been run. Completed items refer to documentation; cost reductions have not been demonstrated.
+Core-only inference has now been tested. Strict integer-only accuracy was 5/24 (20.8%) on a small implementation-check dataset, not a general capability benchmark. LoRA training, RAG comparisons, and promotion mechanisms are not yet implemented; cost reductions have not been demonstrated. See the [pilot results](docs/experiments/MMIA-R001-results.md) and [usage guide](docs/harness-usage.md).
 
 See the [architecture design](docs/Micro-Modular-Intelligence-Architecture.md), [research review and references](docs/research-review-2026-09-11.md), and [roadmap](docs/ROADMAP.md). The detailed documents are primarily in Japanese.
 
@@ -197,10 +202,11 @@ MMIA研究如何通过小型模块的专业化、动态组合、知识记忆与�
 
 - [Done] 已形成研究设计、文献评估、成本模型、实验方案和路线图。
 - [Done] 已记录动态层次形成、晋升、蒸馏与降级的研究方案。
-- [Next] 确定试验配置并实现最小评估框架；比较混合任务单适配器与专业适配器。
+- [Done] 已实现最小框架；两次CPU运行的24条token序列与评分完全一致，也与标准generate一致。
+- [Next] 在pilot-v2中改进标签平衡、难度和未见模板，再比较混合任务单适配器与专业适配器。
 - [Later] 动态协作、知识记忆与更新、共享工作空间、层次结构、SSD加载和独立模型通信。
 - [Later] 基于轨迹的宏封装、上层模块蒸馏、回退与降级实验。
 
-目前尚未运行模型训练或推理实验。[Done]表示文档工作已完成，不代表模型实现或性能验证已经完成。成本降低效果仍待验证。
+目前已完成Core单模型推理预试验。严格整数格式下正确率为5/24（20.8%），数据仅用于实现检查，不能代表一般能力。LoRA训练、RAG比较与晋升机制尚未实现，成本降低效果仍待验证。参见[试验结果](docs/experiments/MMIA-R001-results.md)与[运行说明](docs/harness-usage.md)。
 
 详细内容参见[研究设计](docs/Micro-Modular-Intelligence-Architecture.md)、[研究评估与参考文献](docs/research-review-2026-09-11.md)和[路线图](docs/ROADMAP.md)。详细文档以日语为主。

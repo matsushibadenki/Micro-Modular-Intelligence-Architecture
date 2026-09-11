@@ -8,14 +8,16 @@
 - [Next] high-priority unfinished work
 - [Later] planned, but not the closest next step
 
-現時点では研究文書のみを確認している。以下の[Done]は文書の作成完了を示し、モデル実装・学習・性能実証の完了を意味しない。
+文書整備に加え、最小Core評価基盤と推論予備実験を完了した。[Done]は各行の範囲での完了を示す。専門学習・コスト削減・階層形成の実証はまだ完了していない。
 
 | 状態 | 日本語 | English | 简体中文 | 完了条件 |
 | --- | --- | --- | --- | --- |
 | [Done] | 原設計に基づく研究レビュー作成 | Research review | 研究评估 | [レビュー](research-review-2026-09-11.md)に出典、設計課題、費用モデル、検証案を記載 |
 | [Done] | 動的階層形成の研究設計 | Dynamic hierarchy proposal | 动态层次研究方案 | [追加設計](dynamic-hierarchical-module-formation.md)にH4、昇格・蒸留・降格と比較実験を記載。実装は未完了 |
-| [Next] | モデル・環境と実験条件の確定 | Freeze pilot configuration | 确定试验配置 | model revision、依存版、precision、予算、評価分割、採否基準を固定 |
-| [Next] | 最小評価基盤 MMIA-R001 | Minimal evaluation harness | 最小评估框架 | 三言語の人工問題、採点、Core実行、個別結果と資源ログを再実行可能にする |
+| [Done] | 予備実験のモデル・環境と条件の確定 | Frozen pilot configuration | 固定预试验配置 | Qwen2.5-0.5Bのrevision、CPU float32、ライブラリ版、評価分割、採否基準を記録 |
+| [Done] | 最小評価基盤 MMIA-R001 | Minimal evaluation harness | 最小评估框架 | [結果](experiments/MMIA-R001-results.md)：三言語24問を2回実行しtokenと採点が一致。6件の単体テスト合格 |
+| [Next] | 学習比較用pilot-v2 | Dataset for training comparisons | 训练对比数据 | ラベル層化、難易度、未見テンプレート、十分な件数と比較プロトコルを作成。v1は変更しない |
+| [Next] | 計測・環境再現の拡充 | Profiling and environment reproducibility | 计量与环境复现 | 隔離依存環境、FLOPs推定、学習メモリ、3 seedと不確実性の報告を整備 |
 | [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | 総tokenを統制し、active容量・総容量の二対照を評価 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |

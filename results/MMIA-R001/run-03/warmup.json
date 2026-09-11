@@ -1,0 +1,32 @@
+{
+  "prediction": "The integer 2 is already a single digit, so the only integer you can return is 2.",
+  "token_ids": [
+    785,
+    7546,
+    220,
+    17,
+    374,
+    2669,
+    264,
+    3175,
+    15723,
+    11,
+    773,
+    279,
+    1172,
+    7546,
+    498,
+    646,
+    470,
+    374,
+    220,
+    17,
+    13,
+    151645
+  ],
+  "status": "ok",
+  "input_tokens": 36,
+  "output_tokens": 22,
+  "ttft_seconds": 0.14909358399927441,
+  "completion_seconds": 0.8868524589997833
+}

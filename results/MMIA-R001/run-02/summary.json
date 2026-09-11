@@ -1,0 +1,90 @@
+{
+  "all": {
+    "count": 24,
+    "correct": 5,
+    "accuracy": 0.20833333333333334,
+    "non_ok": 0,
+    "format_invalid": 2,
+    "successful_latency_count": 24,
+    "completion_p50_seconds": 0.19127716649927606,
+    "completion_p95_seconds": 0.718234400050004,
+    "ttft_p50_seconds": 0.11063731249942066
+  },
+  "language/en": {
+    "count": 8,
+    "correct": 3,
+    "accuracy": 0.375,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 8,
+    "completion_p50_seconds": 0.18629556199994113,
+    "completion_p95_seconds": 0.2523313728991525,
+    "ttft_p50_seconds": 0.11174879149984918
+  },
+  "language/ja": {
+    "count": 8,
+    "correct": 0,
+    "accuracy": 0.0,
+    "non_ok": 0,
+    "format_invalid": 2,
+    "successful_latency_count": 8,
+    "completion_p50_seconds": 0.21621499999946536,
+    "completion_p95_seconds": 0.945792056250866,
+    "ttft_p50_seconds": 0.11171647949959151
+  },
+  "language/zh": {
+    "count": 8,
+    "correct": 2,
+    "accuracy": 0.25,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 8,
+    "completion_p50_seconds": 0.1898361664998447,
+    "completion_p95_seconds": 0.23286178969983665,
+    "ttft_p50_seconds": 0.10015966599985404
+  },
+  "domain/coding": {
+    "count": 6,
+    "correct": 0,
+    "accuracy": 0.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 6,
+    "completion_p50_seconds": 0.18416924999928597,
+    "completion_p95_seconds": 0.1864040724994993,
+    "ttft_p50_seconds": 0.11063731249942066
+  },
+  "domain/logic": {
+    "count": 6,
+    "correct": 4,
+    "accuracy": 0.6666666666666666,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 6,
+    "completion_p50_seconds": 0.15494797849896713,
+    "completion_p95_seconds": 0.21048546899965004,
+    "ttft_p50_seconds": 0.1169043125000826
+  },
+  "domain/math": {
+    "count": 6,
+    "correct": 0,
+    "accuracy": 0.0,
+    "non_ok": 0,
+    "format_invalid": 1,
+    "successful_latency_count": 6,
+    "completion_p50_seconds": 0.22706529150036658,
+    "completion_p95_seconds": 0.8278551562507346,
+    "ttft_p50_seconds": 0.0945941039999525
+  },
+  "domain/physics": {
+    "count": 6,
+    "correct": 1,
+    "accuracy": 0.16666666666666666,
+    "non_ok": 0,
+    "format_invalid": 1,
+    "successful_latency_count": 6,
+    "completion_p50_seconds": 0.23189441700105817,
+    "completion_p95_seconds": 0.6651209167498564,
+    "ttft_p50_seconds": 0.11133018750024348
+  }
+}

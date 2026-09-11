@@ -1,0 +1,8 @@
+{
+  "repeated_run_token_and_grade_identity": true,
+  "compared_examples": 24,
+  "generate_mismatches": [],
+  "scope": "Standard generate with identical greedy settings; no prompt/target changes",
+  "verification_script_sha256": "229ff15ddfc41a3820ca1be812e1c6e2ee4d310fb4f3e70fecfb34dd77fb789e",
+  "harness_sha256": "07c4b421be0e6d635964a24b1dbf9cbcb90b81167be815de61956b730c562f39"
+}

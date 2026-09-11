@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MMIA-R001",
+  "purpose": "Harness pilot; not a capability or cost-reduction claim",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_license": "Apache-2.0",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "dataset": "datasets/pilot-v1.jsonl",
+  "split": "validation",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260911,
+  "max_new_tokens": 32,
+  "timeout_seconds": 30,
+  "decode": "manual greedy argmax; KV cache; batch size 1",
+  "primary_metric": "Per-example token identity across two fresh processes",
+  "acceptance": "Two runs finish with no errors/timeouts/truncations, identical per-example token IDs and grades; all 24 validation rows retained. Accuracy is descriptive only."
+}
