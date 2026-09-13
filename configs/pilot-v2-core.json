@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MMIA-R001B",
+  "purpose": "Core-only floor check on pilot-v2 validation; not a specialization or cost-reduction claim",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_license": "Apache-2.0",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "dataset": "datasets/pilot-v2.jsonl",
+  "split": "validation",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260913,
+  "max_new_tokens": 32,
+  "timeout_seconds": 30,
+  "decode": "manual greedy argmax; KV cache; batch size 1",
+  "primary_metric": "Strict exact match, reported descriptively by language/domain/difficulty",
+  "acceptance": "All 432 validation rows are retained with no errors. Accuracy does not gate dataset acceptance and does not demonstrate specialization."
+}

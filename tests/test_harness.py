@@ -54,6 +54,12 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(result["successful_latency_count"], 1)
         self.assertEqual(result["non_ok"], 1)
 
+    def test_optional_difficulty_slice(self):
+        row = {"domain": "math", "language": "en", "difficulty": "easy",
+               "status": "ok", "correct": True, "format_valid": True,
+               "completion_seconds": 1, "ttft_seconds": .1}
+        self.assertEqual(summarize([row])["difficulty/easy"]["accuracy"], 1)
+
     def test_setup_failure_persisted_and_no_overwrite(self):
         import json
         with tempfile.TemporaryDirectory() as root:

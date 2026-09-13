@@ -1,0 +1,4 @@
+{"difficulty": "hard", "domain": "math", "grad_norm": 15.76994800567627, "id": "v2-6b7ec4c4c25046dc-en", "input_tokens": 57, "language": "en", "loss": 1.0306228399276733, "prompt_tokens": 52, "step": 1, "target_tokens": 5}
+{"difficulty": "hard", "domain": "math", "grad_norm": 25.837343215942383, "id": "v2-a71b2cd39dccbd37-ja", "input_tokens": 65, "language": "ja", "loss": 1.714406967163086, "prompt_tokens": 60, "step": 2, "target_tokens": 5}
+{"difficulty": "hard", "domain": "math", "grad_norm": 26.230905532836914, "id": "v2-30f38c53a4f0c1c7-ja", "input_tokens": 66, "language": "ja", "loss": 3.5036652088165283, "prompt_tokens": 60, "step": 3, "target_tokens": 6}
+{"difficulty": "medium", "domain": "physics", "grad_norm": 14.860617637634277, "id": "v2-fe3b83e6316d5f7f-en", "input_tokens": 70, "language": "en", "loss": 2.338014841079712, "prompt_tokens": 65, "step": 4, "target_tokens": 5}

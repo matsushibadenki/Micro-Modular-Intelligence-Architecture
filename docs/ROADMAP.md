@@ -1,6 +1,6 @@
 # MMIA Research Roadmap
 
-更新日：2026-09-11。
+更新日：2026-09-13。
 
 状態表記：
 
@@ -16,9 +16,11 @@
 | [Done] | 動的階層形成の研究設計 | Dynamic hierarchy proposal | 动态层次研究方案 | [追加設計](dynamic-hierarchical-module-formation.md)にH4、昇格・蒸留・降格と比較実験を記載。実装は未完了 |
 | [Done] | 予備実験のモデル・環境と条件の確定 | Frozen pilot configuration | 固定预试验配置 | Qwen2.5-0.5Bのrevision、CPU float32、ライブラリ版、評価分割、採否基準を記録 |
 | [Done] | 最小評価基盤 MMIA-R001 | Minimal evaluation harness | 最小评估框架 | [結果](experiments/MMIA-R001-results.md)：三言語24問を2回実行しtokenと採点が一致。6件の単体テスト合格 |
-| [Next] | 学習比較用pilot-v2 | Dataset for training comparisons | 训练对比数据 | ラベル層化、難易度、未見テンプレート、十分な件数と比較プロトコルを作成。v1は変更しない |
-| [Next] | 計測・環境再現の拡充 | Profiling and environment reproducibility | 计量与环境复现 | 隔離依存環境、FLOPs推定、学習メモリ、3 seedと不確実性の報告を整備 |
-| [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | 総tokenを統制し、active容量・総容量の二対照を評価 |
+| [Done] | 学習比較用pilot-v2 | Dataset for training comparisons | 训练对比数据 | [MMIA-R001B結果](experiments/MMIA-R001B-results.md)：432意味問題、3言語1,296行。均衡・分割・target再計算を自動監査 |
+| [Done] | pilot-v2 Core床効果 | Core-only floor on pilot-v2 | pilot-v2 Core基线 | 432 validation行を保存。strict 21.8%、group bootstrap区間と分野・言語・難易度別結果を記録 |
+| [Done] | LoRA学習経路 MMIA-R002-P0 | LoRA training path | LoRA训练流程 | [結果](experiments/MMIA-R002-P0-results.md)：4 step、有限loss、540,672 trainable parameters、保存・再読込を確認 |
+| [Next] | 学習環境と計測の固定 | Frozen training environment and profiling | 固定训练环境与计量 | 完全なlock、層化samplingの中規模pilot、学習時間・メモリ・token予算を確認 |
+| [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | [draft protocol](experiments/MMIA-R002-protocol.md)をpilot結果で確定し、3 seedでactive容量・総容量の二対照を評価 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |
 | [Later] | 安定知識・更新の比較 | Knowledge and update experiments | 知识与更新实验 | MMIA-R101〜R104でRAG、Memory、Hybridの回収条件を測定 |

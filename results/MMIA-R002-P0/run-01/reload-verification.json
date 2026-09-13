@@ -1,0 +1,9 @@
+{
+  "verified_at": "2026-09-13",
+  "adapter_loaded": true,
+  "active_adapter": "default",
+  "logits_shape": [1, 34, 151936],
+  "all_logits_finite": true,
+  "method": "Fresh base-model load followed by PeftModel.from_pretrained and one forward pass",
+  "scope": "Artifact reload smoke test; output quality and training reproducibility were not evaluated"
+}

@@ -1,0 +1,20 @@
+{
+  "experiment_id": "MMIA-R002-P0",
+  "purpose": "Four-step LoRA training and artifact smoke test; not a quality comparison",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "dataset": "datasets/pilot-v2.jsonl",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260913,
+  "sample_limit": 4,
+  "max_sequence_tokens": 256,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "target_modules": ["q_proj", "v_proj"],
+  "learning_rate": 0.0002,
+  "max_grad_norm": 1.0,
+  "acceptance": "Four optimizer steps finish, every loss is finite, prompt tokens are loss-masked, and a reloadable safetensors adapter is saved. Loss decrease and quality are not acceptance criteria."
+}

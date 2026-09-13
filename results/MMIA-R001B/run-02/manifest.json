@@ -1,0 +1,60 @@
+{
+  "status": "completed",
+  "registered_at": "2026-09-13T12:44:40.544643+00:00",
+  "config": {
+    "experiment_id": "MMIA-R001B",
+    "purpose": "Core-only floor check on pilot-v2 validation; not a specialization or cost-reduction claim",
+    "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+    "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+    "model_license": "Apache-2.0",
+    "model_path": ".models/qwen2.5-0.5b-instruct",
+    "dataset": "datasets/pilot-v2.jsonl",
+    "split": "validation",
+    "device": "cpu",
+    "precision": "float32",
+    "cpu_threads": 4,
+    "seed": 20260913,
+    "max_new_tokens": 32,
+    "timeout_seconds": 30,
+    "decode": "manual greedy argmax; KV cache; batch size 1",
+    "primary_metric": "Strict exact match, reported descriptively by language/domain/difficulty",
+    "acceptance": "All 432 validation rows are retained with no errors. Accuracy does not gate dataset acceptance and does not demonstrate specialization."
+  },
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python": "3.10.18",
+  "energy_joules": null,
+  "estimated_flops": null,
+  "memory_method": "process lifetime ru_maxrss (not per-example GPU peak)",
+  "latency_method": "tokenization through detokenization, synchronized; model load excluded",
+  "timeout_method": "cooperative token-boundary deadline; cannot interrupt one forward",
+  "source_hashes": {
+    "src/mmia/__init__.py": "5b23e7fd5f00f39afa3ee68256a19fee6061c6d0cc3a521f03483cbb41d2abac",
+    "src/mmia/dataset_v2.py": "63e283a386bd0319e61ec581997a16dedb1a4635568cdf7f0cf3add695792f23",
+    "src/mmia/harness.py": "6a56a30c5f77fad1192a3301ca456843d2ca6296de2808025c747ceee0e4102e"
+  },
+  "git_commit": "6d95a8a9c7a7061f8c45182c0c558451f372c3d1",
+  "versions": {
+    "torch": "2.10.0",
+    "transformers": "4.57.6",
+    "numpy": "1.25.2",
+    "huggingface-hub": "0.36.0"
+  },
+  "model_file_hashes": {
+    ".gitattributes": "11ad7efa24975ee4b0c3c3a38ed18737f0658a5f75a0a96787b576a78a023361",
+    "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+    "README.md": "b19c806a904db6dc878a0462e70b551f6b7ac78dfbb88c2eb966ca2b9109ae15",
+    "config.json": "18e18afcaccafade98daf13a54092927904649e1dd4eba8299ab717d5d94ff45",
+    "generation_config.json": "e558847a8b4402616f1273797b015104dc266fe4b520056fca88823ba8f8ebe6",
+    "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+    "model.safetensors": "fdf756fa7fcbe7404d5c60e26bff1a0c8b8aa1f72ced49e7dd0210fe288fb7fe",
+    "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizer_config.json": "5b5d4f65d0acd3b2d56a35b56d374a36cbc1c8fa5cf3b3febbbfabf22f359583",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+  },
+  "dataset_hash": "9b2b13d2e561703b288156753df9ce4b3d0c80eccebb9bc79acf211dd1d88f11",
+  "model_load_seconds": 5.439098250004463,
+  "parameters": 494032768,
+  "example_count": 432,
+  "process_peak_rss_bytes": 3537747968,
+  "finished_at": "2026-09-13T12:47:16.770242+00:00"
+}

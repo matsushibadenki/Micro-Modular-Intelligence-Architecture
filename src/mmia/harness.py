@@ -147,8 +147,8 @@ def percentile(values, q):
 def summarize(records):
     metrics = {}
     slices = {"all": records}
-    for field in ("language", "domain"):
-        for value in sorted({r[field] for r in records}):
+    for field in ("language", "domain", "difficulty"):
+        for value in sorted({r[field] for r in records if field in r}):
             slices[f"{field}/{value}"] = [r for r in records if r[field] == value]
     for name, group in slices.items():
         # Error/timeout outcomes remain in quality denominator; successful timing
@@ -180,7 +180,7 @@ class Core:
             raise RuntimeError("MPS unavailable; choose CPU explicitly")
         self.tokenizer = AutoTokenizer.from_pretrained(config["model_path"], local_files_only=True)
         self.model = AutoModelForCausalLM.from_pretrained(
-            config["model_path"], local_files_only=True, torch_dtype=torch.float32,
+            config["model_path"], local_files_only=True, dtype=torch.float32,
             attn_implementation="eager").to(self.device).eval()
         eos = self.model.generation_config.eos_token_id
         self.eos = set(eos if isinstance(eos, list) else [eos])
