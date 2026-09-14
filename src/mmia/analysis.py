@@ -50,6 +50,27 @@ def analyze(records):
     return report
 
 
+def paired_group_difference(baseline, candidate, seed=20260914, samples=10000):
+    """Candidate minus baseline, paired by example and clustered by semantic group."""
+    left = {row["id"]: row for row in baseline}
+    right = {row["id"]: row for row in candidate}
+    if left.keys() != right.keys():
+        raise ValueError("Paired runs must contain identical example ids")
+    groups = defaultdict(list)
+    for example_id in left:
+        if left[example_id]["group_id"] != right[example_id]["group_id"]:
+            raise ValueError("Semantic group mismatch")
+        groups[left[example_id]["group_id"]].append(
+            int(right[example_id]["correct"]) - int(left[example_id]["correct"]))
+    values = [sum(deltas) / len(deltas) for deltas in groups.values()]
+    rng = random.Random(seed)
+    estimates = sorted(sum(rng.choice(values) for _ in values) / len(values) for _ in range(samples))
+    return {"semantic_groups": len(values), "candidate_minus_baseline": sum(values) / len(values),
+            "lower_95": estimates[int(samples * .025)],
+            "upper_95": estimates[min(samples - 1, int(samples * .975))],
+            "method": "paired semantic-group percentile bootstrap", "seed": seed, "samples": samples}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--predictions", required=True)

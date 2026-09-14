@@ -1,0 +1,21 @@
+{
+  "experiment_id": "MMIA-R002-P1",
+  "purpose": "Stratified medium mixed-LoRA pilot for time and token budgeting; not the registered R002 comparison",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "dataset": "datasets/pilot-v2.jsonl",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260914,
+  "sampling": "stratified",
+  "samples_per_cell": 2,
+  "max_sequence_tokens": 256,
+  "lora_rank": 8,
+  "lora_alpha": 16,
+  "target_modules": ["q_proj", "v_proj"],
+  "learning_rate": 0.0002,
+  "max_grad_norm": 1.0,
+  "acceptance": "Exactly 72 distinct semantic groups cover every domain/language/difficulty cell twice; all optimizer steps have finite loss; processed tokens, time, peak RSS, and adapter hashes are recorded. Quality is evaluated separately and remains exploratory."
+}

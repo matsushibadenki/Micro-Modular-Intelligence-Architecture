@@ -181,7 +181,12 @@ class Core:
         self.tokenizer = AutoTokenizer.from_pretrained(config["model_path"], local_files_only=True)
         self.model = AutoModelForCausalLM.from_pretrained(
             config["model_path"], local_files_only=True, dtype=torch.float32,
-            attn_implementation="eager").to(self.device).eval()
+            attn_implementation="eager")
+        if config.get("adapter_path"):
+            from peft import PeftModel
+            self.model = PeftModel.from_pretrained(
+                self.model, config["adapter_path"], local_files_only=True)
+        self.model = self.model.to(self.device).eval()
         eos = self.model.generation_config.eos_token_id
         self.eos = set(eos if isinstance(eos, list) else [eos])
 
@@ -248,7 +253,12 @@ def run(config, output):
         git = subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True)
         manifest["git_commit"] = git.stdout.strip() if git.returncode == 0 else None
         manifest["versions"] = {p: importlib.metadata.version(p) for p in ["torch", "transformers", "numpy", "huggingface-hub"]}
+        if config.get("adapter_path"):
+            manifest["versions"]["peft"] = importlib.metadata.version("peft")
         manifest["model_file_hashes"] = {p.name: file_hash(p) for p in sorted(Path(config["model_path"]).iterdir()) if p.is_file()}
+        if config.get("adapter_path"):
+            manifest["adapter_file_hashes"] = {
+                p.name: file_hash(p) for p in sorted(Path(config["adapter_path"]).iterdir()) if p.is_file()}
         manifest["dataset_hash"] = file_hash(config["dataset"])
         rows = [json.loads(line) for line in Path(config["dataset"]).read_text().splitlines()]
         validate_rows(rows)
@@ -261,6 +271,7 @@ def run(config, output):
         core = Core(config)
         manifest["model_load_seconds"] = time.perf_counter() - load_start
         manifest["parameters"] = sum(p.numel() for p in core.model.parameters())
+        manifest["trainable_parameters"] = sum(p.numel() for p in core.model.parameters() if p.requires_grad)
         warmup = core.predict("Return only the integer 2.", config["max_new_tokens"], config["timeout_seconds"])
         write_json(output / "warmup.json", warmup)
         if warmup["status"] != "ok":

@@ -9,6 +9,7 @@ import random
 import resource
 import sys
 import time
+from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -21,6 +22,35 @@ def choose_rows(rows, seed, limit):
     if limit < 1 or limit > len(candidates):
         raise ValueError("sample_limit must be between 1 and the train row count")
     return candidates[:limit]
+
+
+def choose_stratified_rows(rows, seed, samples_per_cell):
+    """Balance domain/language/difficulty while avoiding translated group reuse."""
+    if samples_per_cell < 1:
+        raise ValueError("samples_per_cell must be positive")
+    rng = random.Random(seed)
+    by_group = defaultdict(dict)
+    metadata = {}
+    for row in rows:
+        if row["split"] == "train":
+            by_group[row["group_id"]][row["language"]] = row
+            metadata[row["group_id"]] = (row["domain"], row["difficulty"])
+    cells = defaultdict(list)
+    for group_id, cell in metadata.items():
+        cells[cell].append(group_id)
+    selected = []
+    languages = ("en", "ja", "zh")
+    for cell in sorted(cells):
+        group_ids = sorted(cells[cell])
+        rng.shuffle(group_ids)
+        needed = samples_per_cell * len(languages)
+        if len(group_ids) < needed:
+            raise ValueError(f"Not enough distinct semantic groups in cell {cell}")
+        for offset, language in enumerate(languages):
+            chosen = group_ids[offset * samples_per_cell:(offset + 1) * samples_per_cell]
+            selected.extend(by_group[group_id][language] for group_id in chosen)
+    rng.shuffle(selected)
+    return selected
 
 
 def encode_target_only(tokenizer, prompt, answer):
@@ -61,7 +91,12 @@ def run(config, output):
         manifest["source_sha256"] = file_hash(__file__)
         manifest["dataset_sha256"] = file_hash(config["dataset"])
         rows = [json.loads(line) for line in Path(config["dataset"]).read_text().splitlines()]
-        selected = choose_rows(rows, config["seed"], config["sample_limit"])
+        if config.get("sampling") == "stratified":
+            selected = choose_stratified_rows(rows, config["seed"], config["samples_per_cell"])
+        else:
+            selected = choose_rows(rows, config["seed"], config["sample_limit"])
+        manifest["selected_ids"] = [row["id"] for row in selected]
+        manifest["selected_semantic_groups"] = len({row["group_id"] for row in selected})
         tokenizer = AutoTokenizer.from_pretrained(config["model_path"], local_files_only=True)
         base = AutoModelForCausalLM.from_pretrained(
             config["model_path"], local_files_only=True, dtype=torch.float32,

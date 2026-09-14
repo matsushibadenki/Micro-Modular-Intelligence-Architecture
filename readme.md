@@ -76,12 +76,13 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [Done] 最小評価基盤とMMIA-R001予備実験。CPUで24問を2回実行し、全token・採点の一致と標準generateとの一致を確認。
 - [Done] pilot-v2を1,296行で作成し、均衡・分割・正解を自動監査。Core床効果はstrict 94/432（21.8%）。
 - [Done] 4 stepのLoRA学習・保存・再読込を確認。学習対象は540,672 parameter、Adapter重みは約2.1MB。
-- [Next] 層化した中規模学習pilotを行い、MMIA-R002のtoken・step・時間予算を確定。
+- [Done] 層化72 stepの混合LoRAを18.98秒で学習。探索validationはstrict 21.8%から41.2%。
+- [Next] 同じ学習予算で混合LoRAと4専門LoRAを3 seed比較。
 - [Next] 混合単一LoRAと専門LoRA群の比較実験。
 - [Later] 動的連携、知識記憶・更新、Workspace、階層化、SSD配信、独立モデル間通信。
 - [Later] 連携履歴に基づくマクロ化、上位モジュールへの蒸留、フォールバックと降格の比較実験。
 
-現在は最小評価基盤、pilot-v2、Core単独の床効果、4 stepのLoRA学習経路まで実装しています。pilot-v2 validationの整数のみの採点では94/432行（21.8%）が正解でした。LoRAの品質比較、RAG比較、昇格機構は未実装で、コスト削減効果は未検証です。
+現在は最小評価基盤、pilot-v2、Core床効果、層化72 stepの混合LoRA探索評価まで実装しています。strict validationはCoreの94/432行（21.8%）から混合LoRAの178/432行（41.2%）へ改善しました。1 seedの探索結果であり、専門LoRAとの本比較、RAG比較、昇格機構は未実装です。コスト削減効果は未検証です。
 
 [実行方法](docs/harness-usage.md)と[予備実験結果](docs/experiments/MMIA-R001-results.md)を参照してください。
 
@@ -95,6 +96,7 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [MMIA-R001B結果](docs/experiments/MMIA-R001B-results.md)：pilot-v2の監査、Core床効果、分野・言語・難易度別結果。
 - [MMIA-R002プロトコル](docs/experiments/MMIA-R002-protocol.md)：単一LoRAと4専門LoRAの比較条件。
 - [MMIA-R002-P0結果](docs/experiments/MMIA-R002-P0-results.md)：LoRA学習・保存・再読込のsmoke test。
+- [MMIA-R002-P1結果](docs/experiments/MMIA-R002-P1-results.md)：層化学習の費用と探索validation。
 
 ## English
 
@@ -150,11 +152,12 @@ See the [detailed research proposal](docs/dynamic-hierarchical-module-formation.
 - [Done] Implemented the pilot harness; two CPU runs matched all 24 token sequences and grades, also matching standard generate.
 - [Done] Built and audited the 1,296-row pilot-v2; Core-only strict accuracy was 94/432 (21.8%).
 - [Done] Completed a four-step LoRA train/save/reload smoke test with 540,672 trainable parameters and a 2.1MB adapter weight file.
-- [Next] Run a stratified medium pilot and freeze MMIA-R002 token, step, and time budgets.
+- [Done] Trained a stratified 72-step mixed LoRA in 18.98 seconds; exploratory strict validation rose from 21.8% to 41.2%.
+- [Next] Compare mixed and four specialist LoRAs across three seeds at a matched training budget.
 - [Later] Dynamic coordination, knowledge memory and updates, workspace, hierarchy, SSD delivery, and independent models.
 - [Later] Trace-based macros, distilled higher modules, fallback, and demotion experiments.
 
-Core-only inference and the basic LoRA training path have now been tested. Strict Core accuracy was 94/432 (21.8%) on controlled validation rows. Comparative LoRA training, RAG, and promotion mechanisms remain unimplemented; cost reductions have not been demonstrated. See the [pilot-v2 results](docs/experiments/MMIA-R001B-results.md) and [LoRA smoke result](docs/experiments/MMIA-R002-P0-results.md).
+Core inference and an exploratory stratified mixed-LoRA run have been tested. Strict validation improved from 94/432 (21.8%) to 178/432 (41.2%). This is a one-seed pilot; the registered specialist comparison, RAG, and promotion mechanisms remain unimplemented, and cost reductions have not been demonstrated. See the [mixed-LoRA pilot](docs/experiments/MMIA-R002-P1-results.md).
 
 See the [architecture design](docs/Micro-Modular-Intelligence-Architecture.md), [research review and references](docs/research-review-2026-09-11.md), and [roadmap](docs/ROADMAP.md). The detailed documents are primarily in Japanese.
 
@@ -212,10 +215,11 @@ MMIA研究如何通过小型模块的专业化、动态组合、知识记忆与�
 - [Done] 已实现最小框架；两次CPU运行的24条token序列与评分完全一致，也与标准generate一致。
 - [Done] 已生成并审计1,296条pilot-v2数据；Core单模型严格正确率为94/432（21.8%）。
 - [Done] 已完成四步LoRA训练、保存与重新加载；可训练参数540,672，适配器权重约2.1MB。
-- [Next] 运行分层中等规模试验，确定MMIA-R002的token、step与时间预算。
+- [Done] 分层72步混合LoRA训练耗时18.98秒；探索性严格验证从21.8%提升至41.2%。
+- [Next] 在相同训练预算下，用3个seed比较混合LoRA与4个专业LoRA。
 - [Later] 动态协作、知识记忆与更新、共享工作空间、层次结构、SSD加载和独立模型通信。
 - [Later] 基于轨迹的宏封装、上层模块蒸馏、回退与降级实验。
 
-目前已完成pilot-v2的Core基线与基本LoRA训练流程。受控验证数据上的Core严格正确率为94/432（21.8%）。LoRA对比、RAG与晋升机制尚未实现，成本降低效果仍待验证。参见[pilot-v2结果](docs/experiments/MMIA-R001B-results.md)与[LoRA冒烟测试](docs/experiments/MMIA-R002-P0-results.md)。
+目前已完成Core基线与分层72步混合LoRA探索评估。严格验证从94/432（21.8%）提升至178/432（41.2%）。这是单seed试验；专业LoRA正式对比、RAG与晋升机制尚未实现，成本降低效果仍待验证。参见[混合LoRA试验](docs/experiments/MMIA-R002-P1-results.md)。
 
 详细内容参见[研究设计](docs/Micro-Modular-Intelligence-Architecture.md)、[研究评估与参考文献](docs/research-review-2026-09-11.md)和[路线图](docs/ROADMAP.md)。详细文档以日语为主。
