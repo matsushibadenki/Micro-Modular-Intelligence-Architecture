@@ -1,0 +1,90 @@
+{
+  "all": {
+    "count": 108,
+    "correct": 65,
+    "accuracy": 0.6018518518518519,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.2124325629993109,
+    "completion_p95_seconds": 0.2532487089974893,
+    "ttft_p50_seconds": 0.13683170849981252
+  },
+  "language/en": {
+    "count": 36,
+    "correct": 24,
+    "accuracy": 0.6666666666666666,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.20771308300027158,
+    "completion_p95_seconds": 0.2532975317481032,
+    "ttft_p50_seconds": 0.13338800000019546
+  },
+  "language/ja": {
+    "count": 36,
+    "correct": 17,
+    "accuracy": 0.4722222222222222,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.21918591699977696,
+    "completion_p95_seconds": 0.2560077192483732,
+    "ttft_p50_seconds": 0.1441658544990787
+  },
+  "language/zh": {
+    "count": 36,
+    "correct": 24,
+    "accuracy": 0.6666666666666666,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.20604591650044313,
+    "completion_p95_seconds": 0.24135228100112727,
+    "ttft_p50_seconds": 0.13264881249961036
+  },
+  "domain/logic_to_math": {
+    "count": 108,
+    "correct": 65,
+    "accuracy": 0.6018518518518519,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.2124325629993109,
+    "completion_p95_seconds": 0.2532487089974893,
+    "ttft_p50_seconds": 0.13683170849981252
+  },
+  "difficulty/easy": {
+    "count": 36,
+    "correct": 20,
+    "accuracy": 0.5555555555555556,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.19904570799917565,
+    "completion_p95_seconds": 0.23152892724738194,
+    "ttft_p50_seconds": 0.11941639599899645
+  },
+  "difficulty/hard": {
+    "count": 36,
+    "correct": 21,
+    "accuracy": 0.5833333333333334,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.22405160400012392,
+    "completion_p95_seconds": 0.2647580625016417,
+    "ttft_p50_seconds": 0.1489716040014173
+  },
+  "difficulty/medium": {
+    "count": 36,
+    "correct": 24,
+    "accuracy": 0.6666666666666666,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.21197052099887514,
+    "completion_p95_seconds": 0.24288800050089776,
+    "ttft_p50_seconds": 0.13651985399883415
+  }
+}

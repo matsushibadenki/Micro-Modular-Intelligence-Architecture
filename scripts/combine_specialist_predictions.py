@@ -41,10 +41,19 @@ def main():
     parser.add_argument("--dataset", required=True)
     parser.add_argument("--split", default="validation")
     parser.add_argument("--output", required=True)
+    parser.add_argument("--input", action="append", default=[], metavar="DOMAIN=PATH",
+                        help="Repeat for arbitrary dataset domains")
     for domain in DOMAINS:
-        parser.add_argument(f"--{domain}", required=True)
+        parser.add_argument(f"--{domain}")
     args = parser.parse_args()
-    inputs = {domain: getattr(args, domain) for domain in DOMAINS}
+    inputs = {domain: getattr(args, domain) for domain in DOMAINS if getattr(args, domain)}
+    for item in args.input:
+        domain, separator, path = item.partition("=")
+        if not separator or not domain or not path or domain in inputs:
+            raise ValueError(f"Invalid or duplicate --input: {item}")
+        inputs[domain] = path
+    if not inputs:
+        raise ValueError("At least one specialist input is required")
     records, hashes = combine(args.dataset, args.split, inputs)
     output = Path(args.output)
     output.mkdir(parents=True, exist_ok=False)

@@ -263,7 +263,8 @@ def run(config, output):
         rows = [json.loads(line) for line in Path(config["dataset"]).read_text().splitlines()]
         validate_rows(rows)
         domain_filter = config.get("domain_filter")
-        if domain_filter is not None and domain_filter not in DOMAINS:
+        available_domains = {r["domain"] for r in rows}
+        if domain_filter is not None and domain_filter not in available_domains:
             raise ValueError(f"Unknown domain_filter: {domain_filter}")
         selected = [r for r in rows if r["split"] == config["split"]
                     and (domain_filter is None or r["domain"] == domain_filter)]

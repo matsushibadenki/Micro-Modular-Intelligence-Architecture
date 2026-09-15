@@ -19,6 +19,16 @@ class R002ConditionTests(unittest.TestCase):
             self.assertEqual(config["adapter_path"], "new-adapter")
             self.assertEqual(config["lora_rank"], 8)
 
+    def test_path_specialist_overrides_are_explicit(self):
+        root = Path(__file__).parents[1]
+        config = effective_config(
+            root / "configs/r007-seed-20260915-mixed.json", 20260915,
+            "MMIA-R007-S1-C2-CODE-MATH", domain_filter="code_to_math",
+            sample_limit=108)
+        self.assertEqual(config["domain_filter"], "code_to_math")
+        self.assertEqual(config["sample_limit"], 108)
+        self.assertEqual(config["lora_rank"], 8)
+
     def test_rank32_template_keeps_registered_capacity(self):
         root = Path(__file__).parents[1]
         config = effective_config(

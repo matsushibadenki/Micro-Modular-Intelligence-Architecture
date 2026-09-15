@@ -1,6 +1,6 @@
 # MMIA-R007：複合技能Adapter比較プロトコル
 
-登録日：2026-09-15。状態：`registered-before-model-evaluation`。pilot-v3の生成規則、dataset hash、比較条件をモデル評価前に固定した。testは未開封である。
+登録日：2026-09-15。状態：`stopped-after-seed-1-diagnostic`。pilot-v3の生成規則、dataset hash、比較条件をモデル評価前に固定した。その後、事前の学習可能性確認とC2 seed 1診断により非logic経路の強い床効果が解消されなかったため、残るseedとC3を停止した。[停止判断](MMIA-R007-C2-diagnostic-results.md)を参照。testは未開封である。
 
 ## 問い
 

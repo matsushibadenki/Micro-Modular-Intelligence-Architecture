@@ -31,6 +31,19 @@ class CombineSpecialistsTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "specialist contains"):
                 combine(dataset, "validation", inputs)
 
+    def test_arbitrary_composition_domain_is_supported(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            dataset = root / "data.jsonl"
+            prediction = root / "prediction.jsonl"
+            row = {"id": "x", "domain": "code_to_math", "split": "validation"}
+            dataset.write_text(json.dumps(row) + "\n")
+            prediction.write_text(json.dumps({**row, "status": "ok", "correct": True,
+                                               "format_valid": True,
+                                               "completion_seconds": 1.0}) + "\n")
+            records, _ = combine(dataset, "validation", {"code_to_math": prediction})
+            self.assertEqual(records[0]["domain"], "code_to_math")
+
 
 if __name__ == "__main__":
     unittest.main()
