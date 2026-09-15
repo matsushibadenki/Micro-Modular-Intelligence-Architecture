@@ -1,0 +1,104 @@
+{
+  "baseline_sha256": "ae130f4c6c1f5a2bd5d2e88336865d51e1fd5e5642fe5769af58bc15ff8941a2",
+  "candidate_sha256": "7b01855e0272c0b7ccfb2da0419b2e7216c96ab7883a532850b094d1dc57b6f8",
+  "strict_metric": true,
+  "all": {
+    "semantic_groups": 144,
+    "candidate_minus_baseline": 0.31481481481481477,
+    "lower_95": 0.24768518518518517,
+    "upper_95": 0.38657407407407396,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "domain/code_to_math": {
+    "semantic_groups": 36,
+    "candidate_minus_baseline": 0.5092592592592592,
+    "lower_95": 0.36111111111111105,
+    "upper_95": 0.6481481481481484,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "domain/code_to_physics": {
+    "semantic_groups": 36,
+    "candidate_minus_baseline": 0.287037037037037,
+    "lower_95": 0.16666666666666666,
+    "upper_95": 0.4259259259259258,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "domain/logic_to_math": {
+    "semantic_groups": 36,
+    "candidate_minus_baseline": 0.0,
+    "lower_95": 0.0,
+    "upper_95": 0.0,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "domain/math_to_physics": {
+    "semantic_groups": 36,
+    "candidate_minus_baseline": 0.462962962962963,
+    "lower_95": 0.3148148148148149,
+    "upper_95": 0.6111111111111112,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "language/en": {
+    "semantic_groups": 144,
+    "candidate_minus_baseline": 0.3472222222222222,
+    "lower_95": 0.2708333333333333,
+    "upper_95": 0.4236111111111111,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "language/ja": {
+    "semantic_groups": 144,
+    "candidate_minus_baseline": 0.2638888888888889,
+    "lower_95": 0.19444444444444445,
+    "upper_95": 0.3402777777777778,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "language/zh": {
+    "semantic_groups": 144,
+    "candidate_minus_baseline": 0.3333333333333333,
+    "lower_95": 0.2569444444444444,
+    "upper_95": 0.4097222222222222,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "difficulty/easy": {
+    "semantic_groups": 48,
+    "candidate_minus_baseline": 0.0,
+    "lower_95": 0.0,
+    "upper_95": 0.0,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "difficulty/hard": {
+    "semantic_groups": 48,
+    "candidate_minus_baseline": 0.3611111111111111,
+    "lower_95": 0.23611111111111113,
+    "upper_95": 0.48611111111111116,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  },
+  "difficulty/medium": {
+    "semantic_groups": 48,
+    "candidate_minus_baseline": 0.5833333333333334,
+    "lower_95": 0.46527777777777785,
+    "upper_95": 0.6944444444444445,
+    "method": "paired semantic-group percentile bootstrap",
+    "seed": 20260914,
+    "samples": 10000
+  }
+}

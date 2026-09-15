@@ -3,7 +3,7 @@ import unittest
 from collections import Counter
 
 from mmia.dataset_v2 import audit_v2, expected_answer, generate_v2
-from mmia.train_pilot import choose_rows, choose_stratified_rows
+from mmia.train_pilot import choose_cell_balanced_rows, choose_rows, choose_stratified_rows
 
 
 class DatasetV2Tests(unittest.TestCase):
@@ -83,6 +83,13 @@ class DatasetV2Tests(unittest.TestCase):
         self.assertEqual(len({row["group_id"] for row in selected}), len(selected))
         with self.assertRaises(ValueError):
             choose_stratified_rows(self.rows, seed=12, samples_per_cell=2)
+
+    def test_cell_balanced_selection(self):
+        selected = choose_cell_balanced_rows(
+            self.rows, seed=12, samples_per_language_cell=2)
+        counts = Counter((r["domain"], r["difficulty"], r["language"]) for r in selected)
+        self.assertEqual(set(counts.values()), {2})
+        self.assertEqual(len(selected), 4 * 3 * 3 * 2)
 
 
 if __name__ == "__main__":

@@ -54,6 +54,26 @@ def choose_stratified_rows(rows, seed, samples_per_cell):
     return selected
 
 
+def choose_cell_balanced_rows(rows, seed, samples_per_language_cell):
+    """Sample equally by domain, difficulty, and language within train."""
+    if samples_per_language_cell < 1:
+        raise ValueError("samples_per_language_cell must be positive")
+    rng = random.Random(seed)
+    cells = defaultdict(list)
+    for row in rows:
+        if row["split"] == "train":
+            cells[(row["domain"], row["difficulty"], row["language"])].append(row)
+    selected = []
+    for cell in sorted(cells):
+        candidates = sorted(cells[cell], key=lambda row: row["id"])
+        rng.shuffle(candidates)
+        if len(candidates) < samples_per_language_cell:
+            raise ValueError(f"Not enough rows in cell {cell}")
+        selected.extend(candidates[:samples_per_language_cell])
+    rng.shuffle(selected)
+    return selected
+
+
 def encode_target_only(tokenizer, prompt, answer):
     prompt_ids = tokenizer.apply_chat_template(
         [{"role": "user", "content": prompt}], tokenize=True,
@@ -94,6 +114,9 @@ def run(config, output):
         rows = [json.loads(line) for line in Path(config["dataset"]).read_text().splitlines()]
         if config.get("sampling") == "stratified":
             selected = choose_stratified_rows(rows, config["seed"], config["samples_per_cell"])
+        elif config.get("sampling") == "cell_balanced":
+            selected = choose_cell_balanced_rows(
+                rows, config["seed"], config["samples_per_language_cell"])
         else:
             selected = choose_rows(rows, config["seed"], config["sample_limit"],
                                    config.get("domain_filter"))

@@ -108,6 +108,7 @@ MMIA-R002の3 seed平均はrank 8 Mixed 47.38%、4専門LoRA 49.07%、同じ総�
 - [MMIA-R007-P0結果](docs/experiments/MMIA-R007-P0-results.md)：72/432-step Mixed LoRAの学習可能性。
 - [MMIA-R007 C2診断](docs/experiments/MMIA-R007-C2-diagnostic-results.md)：専門化の否定結果と二段階通信への移行。
 - [MMIA-R008結果](docs/experiments/MMIA-R008-results.md)：明示的中間値通信、誤差伝播、費用。
+- [MMIA-R009 seed 1結果](docs/experiments/MMIA-R009-seed-20260915-results.md)：同一総updateでも二段階pipeline 55.56%、end-to-end 21.30%。
 
 ## English
 

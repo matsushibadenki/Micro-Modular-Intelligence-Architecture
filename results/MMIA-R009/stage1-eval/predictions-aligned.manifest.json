@@ -1,0 +1,7 @@
+{
+  "status": "completed",
+  "source_sha256": "f94fae51c5a4fff9be3c2c2352ac0b4fb54ad51cca64b7455ce48fc10a462654",
+  "output_sha256": "63c1b10c00f26e4e17d69e72d4fe6379c2c69edc5f00074084d945fda267e0dd",
+  "rows": 432,
+  "transformation": "id=source_id; original stage id retained as stage_view_id"
+}

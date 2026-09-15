@@ -1,0 +1,9 @@
+{
+  "status": "completed",
+  "rows": 432,
+  "source_sha256": "07d814abfe4e3f35d3f5f59fe2be372158429f05a1459fb5ea6bd9d08cfa450b",
+  "stage1_predictions_sha256": "f94fae51c5a4fff9be3c2c2352ac0b4fb54ad51cca64b7455ce48fc10a462654",
+  "output_sha256": "2e0d23ce8386714c1148c5e8582d66a146d0d31687fd3d1b9760583cfa31588f",
+  "upstream_usable": 432,
+  "upstream_correct": 266
+}

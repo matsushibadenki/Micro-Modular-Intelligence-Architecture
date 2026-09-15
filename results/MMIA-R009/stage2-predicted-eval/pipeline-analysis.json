@@ -1,0 +1,15 @@
+{
+  "rows": 432,
+  "stage1_correct": 266,
+  "stage1_accuracy": 0.6157407407407407,
+  "pipeline_final_correct": 240,
+  "pipeline_final_accuracy": 0.5555555555555556,
+  "both_stages_correct": 240,
+  "final_correct_despite_wrong_intermediate": 0,
+  "final_wrong_despite_correct_intermediate": 26,
+  "end_to_end_completion_p50_seconds": 0.3802858755007037,
+  "end_to_end_completion_p95_seconds": 0.48781126250087253,
+  "latency_rows": 432,
+  "stage1_sha256": "f94fae51c5a4fff9be3c2c2352ac0b4fb54ad51cca64b7455ce48fc10a462654",
+  "stage2_sha256": "ae130f4c6c1f5a2bd5d2e88336865d51e1fd5e5642fe5769af58bc15ff8941a2"
+}
