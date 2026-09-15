@@ -1,0 +1,55 @@
+{
+  "seeds": [
+    {
+      "seed": "20260915",
+      "baseline_accuracy": 0.21296296296296297,
+      "pipeline_accuracy": 0.5555555555555556,
+      "difference": 0.34259259259259256
+    },
+    {
+      "seed": "20260916",
+      "baseline_accuracy": 0.15046296296296297,
+      "pipeline_accuracy": 0.5300925925925926,
+      "difference": 0.3796296296296296
+    },
+    {
+      "seed": "20260917",
+      "baseline_accuracy": 0.16203703703703703,
+      "pipeline_accuracy": 0.5416666666666666,
+      "difference": 0.37962962962962954
+    }
+  ],
+  "prediction_hashes": [
+    {
+      "seed": "20260915",
+      "baseline_sha256": "2e553313e466e161df15cd72cb4c049a72a0b3865a2fcf31c917876ab7147526",
+      "candidate_sha256": "ae130f4c6c1f5a2bd5d2e88336865d51e1fd5e5642fe5769af58bc15ff8941a2"
+    },
+    {
+      "seed": "20260916",
+      "baseline_sha256": "cdeb75c14d6814383b45e834e64b5282a1da6c8c855b6f1daea64e0780b3bd0a",
+      "candidate_sha256": "abaf649a13dff42c5709e612b8c17803c883a85420118efd9bbc4b9c60a40e83"
+    },
+    {
+      "seed": "20260917",
+      "baseline_sha256": "0ba65a87e64aa3819cbf26ea04259675b1372649166e40eb3aefe2a59037afd3",
+      "candidate_sha256": "f6389bb15b97cef20d9835d1cb9ce3ccb4a1e53f9693178234c0d5d4120f0c05"
+    }
+  ],
+  "semantic_groups": 144,
+  "mean_candidate_minus_baseline": 0.367283950617284,
+  "primary_group_bootstrap": {
+    "lower_95": 0.30015432098765416,
+    "upper_95": 0.43441358024691334,
+    "samples": 20000,
+    "seed": 20260917,
+    "method": "bootstrap semantic groups after averaging seed deltas"
+  },
+  "sensitivity_hierarchical_bootstrap": {
+    "lower_95": 0.29706790123456783,
+    "upper_95": 0.44135802469135793,
+    "samples": 20000,
+    "seed": 20260917,
+    "method": "bootstrap training seeds and semantic groups"
+  }
+}

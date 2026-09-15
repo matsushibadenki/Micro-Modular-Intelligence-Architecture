@@ -28,7 +28,9 @@
 | [Done] | MMIA-R007 C2床効果診断 | Specialist floor diagnostic | 专家地板效应诊断 | [結果](experiments/MMIA-R007-C2-diagnostic-results.md)：C2 17.59%、C1 21.30%。非logicの床を破れずend-to-end比較を停止 |
 | [Done] | 二段階MicroModel通信 MMIA-R008 | Two-stage MicroModel communication | 两阶段MicroModel通信 | [結果](experiments/MMIA-R008-results.md)：E2 52.31%、end-to-end 21.30%。Stage 1 56.71%、teacher Stage 2 90.74% |
 | [Done] | 同一update二段階通信 seed 1 | Equal-update two-stage seed 1 | 同更新预算两阶段 seed 1 | [結果](experiments/MMIA-R009-seed-20260915-results.md)：B1 55.56%、B0 21.30%、差+34.26pt（95% CI +27.08〜+41.44） |
-| [Next] | MMIA-R009 seed 2/3反復 | MMIA-R009 seed 2/3 replication | MMIA-R009 seed 2/3复现 | seed 20260916/20260917でB0/B1を再学習し階層bootstrapを実施 |
+| [Done] | MMIA-R009 3-seed同一update比較 | MMIA-R009 three-seed equal-update comparison | MMIA-R009三seed同更新比较 | [結果](experiments/MMIA-R009-results.md)：B1平均54.24%、B0平均17.52%、階層95% CI +29.71〜+44.14pt |
+| [Next] | 同一入力token対照 | Equal-input-token control | 相同输入token对照 | update効果とtoken効果を分離し、Stage 1 curriculumを同一予算で比較 |
+| [Later] | 自動昇格と蒸留 | Automatic promotion and distillation | 自动晋升与蒸馏 | 履歴から`cluster → promote → distill`しfallback/demotionを評価 |
 | [Next] | 同一予算の二段階比較 | Equal-budget two-stage comparison | 相同预算两阶段比较 | E0の432 updateにStage 1/2を配分し、通信の品質差と追加費用を分離 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |

@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 def effective_config(template, seed, experiment_id, adapter_path=None,
-                     domain_filter=None, sample_limit=None):
+                     domain_filter=None, sample_limit=None, dataset=None):
     config = json.loads(Path(template).read_text())
     config["seed"] = seed
     config["experiment_id"] = experiment_id
@@ -16,6 +16,8 @@ def effective_config(template, seed, experiment_id, adapter_path=None,
         config["domain_filter"] = domain_filter
     if sample_limit is not None:
         config["sample_limit"] = sample_limit
+    if dataset is not None:
+        config["dataset"] = dataset
     return config
 
 
@@ -28,11 +30,12 @@ def main():
     parser.add_argument("--adapter-path")
     parser.add_argument("--domain-filter")
     parser.add_argument("--sample-limit", type=int)
+    parser.add_argument("--dataset")
     parser.add_argument("--output", required=True)
     args = parser.parse_args()
     config = effective_config(
         args.template, args.seed, args.experiment_id, args.adapter_path,
-        args.domain_filter, args.sample_limit)
+        args.domain_filter, args.sample_limit, args.dataset)
     if args.mode == "train":
         if args.adapter_path is not None:
             raise ValueError("Training does not accept --adapter-path")
