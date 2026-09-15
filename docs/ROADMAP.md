@@ -20,8 +20,8 @@
 | [Done] | pilot-v2 Core床効果 | Core-only floor on pilot-v2 | pilot-v2 Core基线 | 432 validation行を保存。strict 21.8%、group bootstrap区間と分野・言語・難易度別結果を記録 |
 | [Done] | LoRA学習経路 MMIA-R002-P0 | LoRA training path | LoRA训练流程 | [結果](experiments/MMIA-R002-P0-results.md)：4 step、有限loss、540,672 trainable parameters、保存・再読込を確認 |
 | [Done] | 層化混合LoRA MMIA-R002-P1 | Stratified mixed-LoRA pilot | 分层混合LoRA试验 | [結果](experiments/MMIA-R002-P1-results.md)：72 stepを18.98秒で学習。探索validation 21.8→41.2% |
-| [Next] | 学習環境と本比較条件の固定 | Freeze training and comparison | 固定训练与对比条件 | 完全なlock、同一token/update予算、specialist保存形式、3 seedを確定 |
-| [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | [draft protocol](experiments/MMIA-R002-protocol.md)をpilot結果で確定し、3 seedでactive容量・総容量の二対照を評価 |
+| [Done] | 学習環境と本比較条件の固定 | Freeze training and comparison | 固定训练与对比条件 | [登録プロトコル](experiments/MMIA-R002-protocol.md)に依存版、同一token/update予算、3 seed、採否基準を固定 |
+| [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | [seed 1結果](experiments/MMIA-R002-seed-20260915-results.md)：C2 50.46%、C1 48.84%、差+1.62pt（95% CI −0.93〜+4.40）。残り2 seedとC3を実行 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |
 | [Later] | 安定知識・更新の比較 | Knowledge and update experiments | 知识与更新实验 | MMIA-R101〜R104でRAG、Memory、Hybridの回収条件を測定 |

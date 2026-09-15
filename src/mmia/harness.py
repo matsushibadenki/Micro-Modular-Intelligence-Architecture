@@ -262,7 +262,11 @@ def run(config, output):
         manifest["dataset_hash"] = file_hash(config["dataset"])
         rows = [json.loads(line) for line in Path(config["dataset"]).read_text().splitlines()]
         validate_rows(rows)
-        selected = [r for r in rows if r["split"] == config["split"]]
+        domain_filter = config.get("domain_filter")
+        if domain_filter is not None and domain_filter not in DOMAINS:
+            raise ValueError(f"Unknown domain_filter: {domain_filter}")
+        selected = [r for r in rows if r["split"] == config["split"]
+                    and (domain_filter is None or r["domain"] == domain_filter)]
         if not selected:
             raise ValueError("No examples in selected split")
         random.Random(config["seed"]).shuffle(selected)

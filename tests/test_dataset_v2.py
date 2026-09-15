@@ -67,6 +67,13 @@ class DatasetV2Tests(unittest.TestCase):
         with self.assertRaises(ValueError):
             choose_rows(self.rows, seed=12, limit=0)
 
+    def test_training_sample_can_be_restricted_to_one_domain(self):
+        selected = choose_rows(self.rows, seed=12, limit=5, domain="physics")
+        self.assertEqual(len(selected), 5)
+        self.assertTrue(all(row["domain"] == "physics" for row in selected))
+        with self.assertRaises(ValueError):
+            choose_rows(self.rows, seed=12, limit=1, domain="unknown")
+
     def test_stratified_selection_balances_cells_without_translation_reuse(self):
         selected = choose_stratified_rows(self.rows, seed=12, samples_per_cell=1)
         self.assertEqual(selected, choose_stratified_rows(self.rows, seed=12, samples_per_cell=1))

@@ -1,6 +1,6 @@
 # 最小評価基盤の実行方法
 
-この基盤はCore単独の予備実験用。LoRA学習、RAG、昇格機構はまだ実装していない。
+この基盤はCoreとLoRA Adapterの再現可能な予備実験用。target-only LoRA学習、Adapter評価、domain限定評価、意味group解析まで実装済み。RAGと昇格機構はまだ実装していない。
 
 ## 実行
 

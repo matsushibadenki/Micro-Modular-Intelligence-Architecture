@@ -16,8 +16,9 @@ from pathlib import Path
 from .harness import file_hash, write_json
 
 
-def choose_rows(rows, seed, limit):
-    candidates = [row for row in rows if row["split"] == "train"]
+def choose_rows(rows, seed, limit, domain=None):
+    candidates = [row for row in rows if row["split"] == "train"
+                  and (domain is None or row["domain"] == domain)]
     random.Random(seed).shuffle(candidates)
     if limit < 1 or limit > len(candidates):
         raise ValueError("sample_limit must be between 1 and the train row count")
@@ -94,7 +95,8 @@ def run(config, output):
         if config.get("sampling") == "stratified":
             selected = choose_stratified_rows(rows, config["seed"], config["samples_per_cell"])
         else:
-            selected = choose_rows(rows, config["seed"], config["sample_limit"])
+            selected = choose_rows(rows, config["seed"], config["sample_limit"],
+                                   config.get("domain_filter"))
         manifest["selected_ids"] = [row["id"] for row in selected]
         manifest["selected_semantic_groups"] = len({row["group_id"] for row in selected})
         tokenizer = AutoTokenizer.from_pretrained(config["model_path"], local_files_only=True)
