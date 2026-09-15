@@ -82,7 +82,8 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [Done] 二技能を連結するpilot-v3を1,296行で作成・監査。Core床効果は3.01%。
 - [Done] pilot-v3 Mixed LoRAは72-stepで10.19%、432-stepで21.30%。ただし非logic経路は1.85〜8.33%。
 - [Done] 経路専門C2 seed 1は17.59%でC1の21.30%を下回り、end-to-end比較を停止。
-- [Next] 中間値を明示的に渡す二段階MicroModel通信を検証。
+- [Done] 二段階MicroModel通信は52.31%でend-to-end 21.30%を上回った。teacher Stage 2は90.74%、Stage 1は56.71%。
+- [Next] 総updateを一致させた二段階構成を比較。
 - [Later] 動的連携、知識記憶・更新、Workspace、階層化、SSD配信、独立モデル間通信。
 - [Later] 連携履歴に基づくマクロ化、上位モジュールへの蒸留、フォールバックと降格の比較実験。
 
@@ -106,6 +107,7 @@ MMIA-R002の3 seed平均はrank 8 Mixed 47.38%、4専門LoRA 49.07%、同じ総�
 - [MMIA-R007プロトコル](docs/experiments/MMIA-R007-protocol.md)／[C0結果](docs/experiments/MMIA-R007-C0-results.md)：複合技能pilot-v3。
 - [MMIA-R007-P0結果](docs/experiments/MMIA-R007-P0-results.md)：72/432-step Mixed LoRAの学習可能性。
 - [MMIA-R007 C2診断](docs/experiments/MMIA-R007-C2-diagnostic-results.md)：専門化の否定結果と二段階通信への移行。
+- [MMIA-R008結果](docs/experiments/MMIA-R008-results.md)：明示的中間値通信、誤差伝播、費用。
 
 ## English
 
@@ -167,7 +169,8 @@ See the [detailed research proposal](docs/dynamic-hierarchical-module-formation.
 - [Done] Built and audited the 1,296-row two-skill pilot-v3; the Core-only floor was 3.01%.
 - [Done] pilot-v3 mixed LoRA reached 10.19% at 72 steps and 21.30% at 432 steps; non-logic paths remained at 1.85–8.33%.
 - [Done] Seed-1 path specialists scored 17.59% versus 21.30% for mixed LoRA; the end-to-end comparison was stopped.
-- [Next] Test two-stage MicroModel communication with an explicit intermediate value.
+- [Done] Explicit two-stage communication reached 52.31% versus 21.30% end-to-end; teacher Stage 2 reached 90.74% and Stage 1 56.71%.
+- [Next] Compare the two-stage system under an equal total-update budget.
 - [Later] Dynamic coordination, knowledge memory and updates, workspace, hierarchy, SSD delivery, and independent models.
 - [Later] Trace-based macros, distilled higher modules, fallback, and demotion experiments.
 
@@ -235,7 +238,8 @@ MMIA研究如何通过小型模块的专业化、动态组合、知识记忆与�
 - [Done] 已生成并审计1,296条双技能pilot-v3数据；Core基线为3.01%。
 - [Done] pilot-v3混合LoRA在72步达到10.19%，432步达到21.30%；非逻辑路径仍为1.85%–8.33%。
 - [Done] seed-1路径专家为17.59%，低于混合LoRA的21.30%；已停止end-to-end比较。
-- [Next] 测试显式传递中间值的两阶段MicroModel通信。
+- [Done] 显式两阶段通信达到52.31%，端到端为21.30%；teacher Stage 2为90.74%，Stage 1为56.71%。
+- [Next] 在相同总更新预算下比较两阶段系统。
 - [Later] 动态协作、知识记忆与更新、共享工作空间、层次结构、SSD加载和独立模型通信。
 - [Later] 基于轨迹的宏封装、上层模块蒸馏、回退与降级实验。
 

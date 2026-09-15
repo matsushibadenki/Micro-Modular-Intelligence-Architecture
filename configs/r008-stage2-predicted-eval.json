@@ -1,0 +1,17 @@
+{
+  "experiment_id": "MMIA-R008-S1-E2-STAGE2-EVAL",
+  "purpose": "Stage-2 validation using actual Stage-1 intermediate predictions",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "adapter_path": "results/MMIA-R008/stage2-teacher-train/adapter",
+  "dataset": "datasets/pilot-v3-stage2-predicted-validation.jsonl",
+  "split": "validation",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260915,
+  "max_new_tokens": 32,
+  "timeout_seconds": 30,
+  "decode": "manual greedy argmax; KV cache; batch size 1"
+}

@@ -26,7 +26,8 @@
 | [Done] | 複合技能benchmark pilot-v3 | Compositional skill benchmark | 组合技能基准 | [C0結果](experiments/MMIA-R007-C0-results.md)：432意味group、再計算可能な中間値、Core 3.01%。比較可能性のpilotは未完了 |
 | [Done] | MMIA-R007学習可能性pilot | R007 learnability pilot | R007可学习性试验 | [結果](experiments/MMIA-R007-P0-results.md)：Core 3.01%、72-step 10.19%、432-step C1 21.30%。非logicは1.85〜8.33% |
 | [Done] | MMIA-R007 C2床効果診断 | Specialist floor diagnostic | 专家地板效应诊断 | [結果](experiments/MMIA-R007-C2-diagnostic-results.md)：C2 17.59%、C1 21.30%。非logicの床を破れずend-to-end比較を停止 |
-| [Next] | 二段階MicroModel通信 | Two-stage MicroModel communication | 两阶段MicroModel通信 | 保存済み中間値を境界にstage 1→stage 2を構成し、teacher／予測中間値とend-to-endを比較 |
+| [Done] | 二段階MicroModel通信 MMIA-R008 | Two-stage MicroModel communication | 两阶段MicroModel通信 | [結果](experiments/MMIA-R008-results.md)：E2 52.31%、end-to-end 21.30%。Stage 1 56.71%、teacher Stage 2 90.74% |
+| [Next] | 同一予算の二段階比較 | Equal-budget two-stage comparison | 相同预算两阶段比较 | E0の432 updateにStage 1/2を配分し、通信の品質差と追加費用を分離 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |
 | [Later] | 安定知識・更新の比較 | Knowledge and update experiments | 知识与更新实验 | MMIA-R101〜R104でRAG、Memory、Hybridの回収条件を測定 |

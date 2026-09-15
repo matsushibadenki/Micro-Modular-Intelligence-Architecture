@@ -1,0 +1,12 @@
+{
+  "source_rows": 1296,
+  "stage1_rows": 1296,
+  "stage2_rows": 1296,
+  "source_semantic_groups": 432,
+  "identity_preserved": true,
+  "targets_preserved": true,
+  "teacher_intermediate_in_stage2": true,
+  "source_sha256": "07d814abfe4e3f35d3f5f59fe2be372158429f05a1459fb5ea6bd9d08cfa450b",
+  "stage1_sha256": "dde4559c3d7990263a8013e5af4ae92a8b0f94ffb2b66ee2b77e30885ae716aa",
+  "stage2_sha256": "1f588b0e7e7bda934017788375d08420b5119dee9ce79328647d479edee8a765"
+}
