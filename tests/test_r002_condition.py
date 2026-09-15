@@ -19,6 +19,15 @@ class R002ConditionTests(unittest.TestCase):
             self.assertEqual(config["adapter_path"], "new-adapter")
             self.assertEqual(config["lora_rank"], 8)
 
+    def test_rank32_template_keeps_registered_capacity(self):
+        root = Path(__file__).parents[1]
+        config = effective_config(
+            root / "configs/r002-seed-20260915-mixed-rank32.json",
+            20260917, "MMIA-R002-S3-C3")
+        self.assertEqual(config["lora_rank"], 32)
+        self.assertEqual(config["lora_alpha"], 64)
+        self.assertEqual(config["sample_limit"], 432)
+
 
 if __name__ == "__main__":
     unittest.main()

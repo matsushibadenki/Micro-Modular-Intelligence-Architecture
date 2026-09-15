@@ -1,0 +1,110 @@
+{
+  "prediction_sha256": "c22ae1c892c36663fd643889ef3f8edfed7caba2916f796b89fb4c7d605b9fb6",
+  "strict_primary_metric": true,
+  "slices": {
+    "all": {
+      "semantic_groups": 144,
+      "translation_macro_accuracy": 0.4930555555555556,
+      "all_languages_correct_rate": 0.4722222222222222,
+      "any_language_correct_rate": 0.5069444444444444,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.41435185185185186,
+        "upper_95": 0.574074074074074
+      }
+    },
+    "domain/coding": {
+      "semantic_groups": 36,
+      "translation_macro_accuracy": 0.29629629629629634,
+      "all_languages_correct_rate": 0.2777777777777778,
+      "any_language_correct_rate": 0.3055555555555556,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.15740740740740738,
+        "upper_95": 0.4444444444444444
+      }
+    },
+    "domain/logic": {
+      "semantic_groups": 36,
+      "translation_macro_accuracy": 1.0,
+      "all_languages_correct_rate": 1.0,
+      "any_language_correct_rate": 1.0,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 1.0,
+        "upper_95": 1.0
+      }
+    },
+    "domain/math": {
+      "semantic_groups": 36,
+      "translation_macro_accuracy": 0.3333333333333333,
+      "all_languages_correct_rate": 0.3333333333333333,
+      "any_language_correct_rate": 0.3333333333333333,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.19444444444444445,
+        "upper_95": 0.5
+      }
+    },
+    "domain/physics": {
+      "semantic_groups": 36,
+      "translation_macro_accuracy": 0.3425925925925926,
+      "all_languages_correct_rate": 0.2777777777777778,
+      "any_language_correct_rate": 0.3888888888888889,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.2037037037037037,
+        "upper_95": 0.4907407407407407
+      }
+    },
+    "difficulty/easy": {
+      "semantic_groups": 48,
+      "translation_macro_accuracy": 0.951388888888889,
+      "all_languages_correct_rate": 0.9166666666666666,
+      "any_language_correct_rate": 0.9791666666666666,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.8958333333333331,
+        "upper_95": 0.9930555555555557
+      }
+    },
+    "difficulty/hard": {
+      "semantic_groups": 48,
+      "translation_macro_accuracy": 0.2777777777777778,
+      "all_languages_correct_rate": 0.25,
+      "any_language_correct_rate": 0.2916666666666667,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.1597222222222222,
+        "upper_95": 0.40277777777777785
+      }
+    },
+    "difficulty/medium": {
+      "semantic_groups": 48,
+      "translation_macro_accuracy": 0.25,
+      "all_languages_correct_rate": 0.25,
+      "any_language_correct_rate": 0.25,
+      "accuracy_95_interval": {
+        "method": "semantic-group percentile bootstrap",
+        "seed": 20260913,
+        "samples": 10000,
+        "lower_95": 0.125,
+        "upper_95": 0.375
+      }
+    }
+  }
+}

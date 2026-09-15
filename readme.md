@@ -78,11 +78,14 @@ MicroModelのネットワークからMicroMoEを形成し、安定した役割�
 - [Done] 4 stepのLoRA学習・保存・再読込を確認。学習対象は540,672 parameter、Adapter重みは約2.1MB。
 - [Done] 層化72 stepの混合LoRAを18.98秒で学習。探索validationはstrict 21.8%から41.2%。
 - [Done] MMIA-R002 C1/C2を3 seed完了。各runで432 update・33,939入力tokenを一致。
-- [Next] 総容量対照C3と、飽和しにくい論理課題を実行。
+- [Done] 総容量対照C3を3 seed完了。rank 32 Mixedは51.23%で4専門LoRAの49.07%を上回った。
+- [Done] 二技能を連結するpilot-v3を1,296行で作成・監査。Core床効果は3.01%。
+- [Done] pilot-v3 Mixed LoRAは72-stepで10.19%、432-stepで21.30%。ただし非logic経路は1.85〜8.33%。
+- [Next] 経路専門C2 seed 1が非logicの床効果を破れるか診断。
 - [Later] 動的連携、知識記憶・更新、Workspace、階層化、SSD配信、独立モデル間通信。
 - [Later] 連携履歴に基づくマクロ化、上位モジュールへの蒸留、フォールバックと降格の比較実験。
 
-MMIA-R002の3 seed平均は専門LoRA群49.07%、混合LoRA47.38%、差+1.70ptでした。主要CIは+0.08〜+3.40ptですが、seedも再標本化した階層CIは−0.93〜+4.86ptです。限定的な専門化利益は観測されましたが、頑健な実証、RAG比較、昇格機構は未完了です。
+MMIA-R002の3 seed平均はrank 8 Mixed 47.38%、4専門LoRA 49.07%、同じ総容量のrank 32 Mixed 51.23%でした。C3はC1より+3.86ptで階層CIも+0.77〜+6.79ptです。現datasetでは専門分割より単一Adapterの容量増加が有効でした。複合技能、RAG、昇格機構の実証は未完了です。
 
 [実行方法](docs/harness-usage.md)と[予備実験結果](docs/experiments/MMIA-R001-results.md)を参照してください。
 
@@ -99,6 +102,8 @@ MMIA-R002の3 seed平均は専門LoRA群49.07%、混合LoRA47.38%、差+1.70pt�
 - [MMIA-R002-P1結果](docs/experiments/MMIA-R002-P1-results.md)：層化学習の費用と探索validation。
 - [MMIA-R002 seed 1結果](docs/experiments/MMIA-R002-seed-20260915-results.md)：同一予算の混合LoRA対4専門LoRA。
 - [MMIA-R002 3-seed結果](docs/experiments/MMIA-R002-results.md)：C1/C2の主要結果、費用、感度分析。
+- [MMIA-R007プロトコル](docs/experiments/MMIA-R007-protocol.md)／[C0結果](docs/experiments/MMIA-R007-C0-results.md)：複合技能pilot-v3。
+- [MMIA-R007-P0結果](docs/experiments/MMIA-R007-P0-results.md)：72/432-step Mixed LoRAの学習可能性。
 
 ## English
 
@@ -156,11 +161,14 @@ See the [detailed research proposal](docs/dynamic-hierarchical-module-formation.
 - [Done] Completed a four-step LoRA train/save/reload smoke test with 540,672 trainable parameters and a 2.1MB adapter weight file.
 - [Done] Trained a stratified 72-step mixed LoRA in 18.98 seconds; exploratory strict validation rose from 21.8% to 41.2%.
 - [Done] Completed the registered C1/C2 comparison across three seeds with matched update and token budgets.
-- [Next] Run the C3 total-capacity control and a less saturated logic benchmark.
+- [Done] Completed C3 across three seeds; rank-32 mixed reached 51.23% versus 49.07% for four specialists.
+- [Done] Built and audited the 1,296-row two-skill pilot-v3; the Core-only floor was 3.01%.
+- [Done] pilot-v3 mixed LoRA reached 10.19% at 72 steps and 21.30% at 432 steps; non-logic paths remained at 1.85–8.33%.
+- [Next] Diagnose whether seed-1 path specialists can break the non-logic floors.
 - [Later] Dynamic coordination, knowledge memory and updates, workspace, hierarchy, SSD delivery, and independent models.
 - [Later] Trace-based macros, distilled higher modules, fallback, and demotion experiments.
 
-Across three MMIA-R002 seeds, specialists averaged 49.07% versus 47.38% for mixed LoRA. The +1.70-point difference had a fixed-seed group interval of +0.08 to +3.40, while the hierarchical seed-and-group interval crossed zero at −0.93 to +4.86. C3, RAG, and promotion experiments remain unfinished.
+Across three MMIA-R002 seeds, rank-8 mixed scored 47.38%, four specialists 49.07%, and equal-total-capacity rank-32 mixed 51.23%. C3 beat C1 by +3.86 points with a hierarchical interval of +0.77 to +6.79. Capacity scaling beat specialist partitioning on this dataset. Compositional, RAG, and promotion experiments remain unfinished.
 
 See the [architecture design](docs/Micro-Modular-Intelligence-Architecture.md), [research review and references](docs/research-review-2026-09-11.md), and [roadmap](docs/ROADMAP.md). The detailed documents are primarily in Japanese.
 
@@ -220,10 +228,13 @@ MMIA研究如何通过小型模块的专业化、动态组合、知识记忆与�
 - [Done] 已完成四步LoRA训练、保存与重新加载；可训练参数540,672，适配器权重约2.1MB。
 - [Done] 分层72步混合LoRA训练耗时18.98秒；探索性严格验证从21.8%提升至41.2%。
 - [Done] 已完成MMIA-R002三个seed的C1/C2比较，并严格匹配更新次数与token预算。
-- [Next] 执行总容量对照C3和更不易饱和的逻辑基准。
+- [Done] 已完成C3三个seed；rank-32混合Adapter为51.23%，高于四专家的49.07%。
+- [Done] 已生成并审计1,296条双技能pilot-v3数据；Core基线为3.01%。
+- [Done] pilot-v3混合LoRA在72步达到10.19%，432步达到21.30%；非逻辑路径仍为1.85%–8.33%。
+- [Next] 诊断seed-1路径专家能否突破非逻辑任务的地板效应。
 - [Later] 动态协作、知识记忆与更新、共享工作空间、层次结构、SSD加载和独立模型通信。
 - [Later] 基于轨迹的宏封装、上层模块蒸馏、回退与降级实验。
 
-MMIA-R002三个seed中，专家组平均49.07%，混合LoRA为47.38%。差值+1.70个百分点；固定seed的语义组区间为+0.08至+3.40，而seed与语义组层次区间为−0.93至+4.86。C3、RAG与晋升实验仍待完成。
+MMIA-R002三个seed中，rank-8混合为47.38%，四专家为49.07%，相同总容量的rank-32混合为51.23%。C3比C1高+3.86个百分点，层次区间为+0.77至+6.79。当前数据上，增加单一Adapter容量优于专家分割。组合任务、RAG与晋升实验仍待完成。
 
 详细内容参见[研究设计](docs/Micro-Modular-Intelligence-Architecture.md)、[研究评估与参考文献](docs/research-review-2026-09-11.md)和[路线图](docs/ROADMAP.md)。详细文档以日语为主。

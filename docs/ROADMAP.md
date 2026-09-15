@@ -22,7 +22,10 @@
 | [Done] | 層化混合LoRA MMIA-R002-P1 | Stratified mixed-LoRA pilot | 分层混合LoRA试验 | [結果](experiments/MMIA-R002-P1-results.md)：72 stepを18.98秒で学習。探索validation 21.8→41.2% |
 | [Done] | 学習環境と本比較条件の固定 | Freeze training and comparison | 固定训练与对比条件 | [登録プロトコル](experiments/MMIA-R002-protocol.md)に依存版、同一token/update予算、3 seed、採否基準を固定 |
 | [Done] | 単一LoRA対専門LoRA MMIA-R002 C1/C2 | Single versus specialist adapters | 单适配器与专家适配器对比 | [3-seed結果](experiments/MMIA-R002-results.md)：C2平均49.07%、C1 47.38%、差+1.70pt。主要CI +0.08〜+3.40、階層CI −0.93〜+4.86 |
-| [Next] | MMIA-R002 C3総容量対照 | Total-capacity mixed control | 总容量混合对照 | rank 32 Mixed LoRAを3 seed実行し、4専門家の総Adapter容量との関係を測る |
+| [Done] | MMIA-R002 C3総容量対照 | Total-capacity mixed control | 总容量混合对照 | rank 32 Mixedは平均51.23%。C1より+3.86pt、C2より+2.16ptで、現datasetでは専門分割の優位を否定 |
+| [Done] | 複合技能benchmark pilot-v3 | Compositional skill benchmark | 组合技能基准 | [C0結果](experiments/MMIA-R007-C0-results.md)：432意味group、再計算可能な中間値、Core 3.01%。比較可能性のpilotは未完了 |
+| [Done] | MMIA-R007学習可能性pilot | R007 learnability pilot | R007可学习性试验 | [結果](experiments/MMIA-R007-P0-results.md)：Core 3.01%、72-step 10.19%、432-step C1 21.30%。非logicは1.85〜8.33% |
+| [Next] | MMIA-R007 C2床効果診断 | Specialist floor diagnostic | 专家地板效应诊断 | seed 1の4経路専門Adapterが非logic経路を比較可能な精度へ上げるか確認 |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |
 | [Later] | 安定知識・更新の比較 | Knowledge and update experiments | 知识与更新实验 | MMIA-R101〜R104でRAG、Memory、Hybridの回収条件を測定 |

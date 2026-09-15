@@ -1,6 +1,6 @@
 # MMIA-R002：Mixed LoRA対4専門LoRA 3-seed結果
 
-実施日：2026-09-15。事前登録した3 seed（20260915、20260916、20260917）で、rank 8 Mixed LoRA（C1）と、正解domain labelで選択する4つのrank 8専門LoRA（C2）を比較した。各seed・各条件はtrain全432行をちょうど1回処理した。testは未使用である。
+実施日：2026-09-15。事前登録した3 seed（20260915、20260916、20260917）で、rank 8 Mixed LoRA（C1）、正解domain labelで選択する4つのrank 8専門LoRA（C2）、rank 32 Mixed LoRA総容量対照（C3）を比較した。各seed・各条件はtrain全432行をちょうど1回処理した。testは未使用である。
 
 ## 主要結果
 
@@ -14,6 +14,21 @@
 3 seedで平均した各意味groupの対応差をbootstrapすると95%区間は**+0.08〜+3.40pt**であり、事前登録した品質条件「区間下限が0より大きい」をわずかに満たした。ただしseedと意味groupの両方を再標本化する階層bootstrapでは**−0.93〜+4.86pt**となり、学習順序の母集団に対する頑健な優位性は確認できない。
 
 この差を実用上大きいとは評価しない。C2はactive Adapter容量をC1と同じに保つ一方、4倍の総Adapter容量を保存するため、+1.70ptが保存・配信・cache管理の追加費用を正当化するかは別途判断が必要である。
+
+## 総容量対照C3
+
+| seed | C1 rank 8 | C2 4 specialists | C3 rank 32 mixed |
+| --- | ---: | ---: | ---: |
+| 20260915 | 48.84% | 50.46% | **52.31%** |
+| 20260916 | 44.21% | 47.69% | **49.31%** |
+| 20260917 | 49.07% | 49.07% | **52.08%** |
+| 3-seed平均 | 47.38% | 49.07% | **51.23%** |
+
+C3はC1より平均+3.86pt高く、主要group bootstrapは+1.70〜+6.25pt、seedも再標本化する階層bootstrapも+0.77〜+6.79ptだった。C3は3 seedすべてでC1を上回った。
+
+C2はC3より平均−2.16pt低かった。主要group bootstrapは−4.01〜−0.46ptでC3を支持し、階層bootstrapは−4.71〜+0.08ptで境界的だった。したがってC1に対するC2の小さな改善は、同じ総容量の単一Adapterを上回る専門分割効果ではない。
+
+C2の4つの`adapter_model.safetensors`は合計8,700,672 byte、C3は8,663,400 byteで、重み保存量は近い。C3の可学習parameterは2,162,688で、rank 8 Adapter 4個の合計と一致する。
 
 ## 分野別平均
 
@@ -47,25 +62,28 @@ logicの改善が全体差の大部分を占めるが、この分野は二値で
 
 seed中央値は登録上限内だが、seed 20260916のp95は超過した。各専門家を独立processで読み込んだため、常駐Core＋Adapter cacheの運用形態とは異なる。レイテンシ条件は「中央値では達成、run単位では不安定」と判定する。
 
+C3/C1の推論時間比はseed中央値でp50 1.12、p95 1.12だった。C3のp95はseed 20260915だけ1.30倍で、他は1.02倍と1.12倍だった。C2/C3もseedによってp50 0.86〜1.13、p95 0.92〜1.39と揺れ、現在の逐次CPU測定だけでは両者の小さい推論費用差を安定して順位付けできない。
+
 ## 結論
 
-MMIA-R002は、**既知domainによるoracle選択と、この限定dataset内では、専門Adapter分割に小さな品質上の利点があり得る**ことを示した。主要bootstrapは採択条件を満たすが、階層bootstrap、分野別一貫性、推論p95の再現性は十分でない。
+MMIA-R002は、**既知domainによるoracle選択でも、同じ総Adapter容量なら専門分割が単一Mixed Adapterを上回らない**ことを示した。C2は低active容量のC1より小さく改善したが、同じ総容量のC3が最も高精度だった。現条件では、保存・routing・cache管理を追加してC2を採用する根拠は弱い。
 
 したがって次の研究では、大規模な階層形成へ直ちに進まず、以下を先に行う。
 
 - [Done] 3 seedのactive容量対照C1/C2を完了。
-- [Next] rank 32 Mixed LoRA（C3）で4専門家の総容量に近い対照を測る。
-- [Next] logicの寄与を除いた事前指定感度分析と、より情報量の高い論理課題を設計する。
-- [Later] C2の利点が残る場合のみ、未知domainを選ぶrouter（MMIA-R003）を評価する。
+- [Done] rank 32 Mixed LoRA（C3）を3 seed測定し、C1/C2を上回ることを確認。
+- [Next] より情報量の高い論理課題と、複数技能を組み合わせる複合課題を別dataset IDで設計する。
+- [Later] 新datasetでもC2の利点が残る場合のみ、未知domainを選ぶrouter（MMIA-R003）を評価する。
 - [Later] 常駐Core＋Adapter cacheでload、memory、p95を再測定する。
 
 ## 再現物
 
 - [登録プロトコル](MMIA-R002-protocol.md)
 - [3-seed集約JSON](../../results/MMIA-R002/aggregate-3-seeds.json)
+- [C3対C1集約JSON](../../results/MMIA-R002/aggregate-rank32-vs-rank8.json)／[C2対C3集約JSON](../../results/MMIA-R002/aggregate-specialists-vs-rank32.json)
 - [seed 1詳細](MMIA-R002-seed-20260915-results.md)
 - 各seedのimmutable manifest、stepログ、予測、解析は`results/MMIA-R002/seed-*`に保存した。
 
-**English:** Across three registered seeds, oracle specialists averaged 49.07% versus 47.38% for mixed LoRA, a +1.70-point paired difference. The primary fixed-seed group bootstrap interval was +0.08 to +3.40 points, narrowly meeting the registered quality criterion. A hierarchical bootstrap over seeds and groups crossed zero (−0.93 to +4.86), coding regressed on average, and one seed exceeded the inference p95 limit. The result supports only a small, conditional specialization benefit. C3 and a stronger logic benchmark come next.
+**English:** Across three registered seeds, rank-8 oracle specialists averaged 49.07%, rank-8 mixed LoRA 47.38%, and the equal-total-capacity rank-32 mixed control 51.23%. C3 beat C1 by +3.86 points with a hierarchical bootstrap interval of +0.77 to +6.79. C2 trailed C3 by 2.16 points. Under this benchmark, specialist partitioning does not beat a single mixed adapter with similar total trainable parameters and weight storage. A stronger logic and compositional benchmark comes next.
 
-**简体中文：** 在三个已注册seed中，oracle专家组平均为49.07%，混合LoRA为47.38%，配对差值+1.70个百分点。固定seed的主要语义组bootstrap区间为+0.08至+3.40，勉强满足预注册质量条件；同时对seed和语义组进行层次bootstrap后区间跨越0（−0.93至+4.86），coding平均退化，且一个seed超过推理p95上限。因此结果只支持较小且有条件的专业化收益。下一步是C3和更有区分力的逻辑基准。
+**简体中文：** 三个已注册seed中，rank-8 oracle专家组平均49.07%，rank-8混合LoRA为47.38%，相同总容量的rank-32混合对照C3为51.23%。C3比C1高+3.86个百分点，层次bootstrap区间为+0.77至+6.79；C2则比C3低2.16个百分点。在该基准下，专家分割未能超过具有相近总可训练参数和权重存储量的单一混合Adapter。下一步是更有区分力的逻辑与组合任务基准。

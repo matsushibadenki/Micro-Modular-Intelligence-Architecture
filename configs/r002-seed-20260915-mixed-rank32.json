@@ -1,0 +1,19 @@
+{
+  "experiment_id": "MMIA-R002-S1-C3",
+  "purpose": "Registered seed 1 mixed rank-32 total-capacity LoRA control",
+  "model_id": "Qwen/Qwen2.5-0.5B-Instruct",
+  "model_revision": "7ae557604adf67be50417f59c2c2f167def9a775",
+  "model_path": ".models/qwen2.5-0.5b-instruct",
+  "dataset": "datasets/pilot-v2.jsonl",
+  "device": "cpu",
+  "precision": "float32",
+  "cpu_threads": 4,
+  "seed": 20260915,
+  "sample_limit": 432,
+  "max_sequence_tokens": 256,
+  "lora_rank": 32,
+  "lora_alpha": 64,
+  "target_modules": ["q_proj", "v_proj"],
+  "learning_rate": 0.0002,
+  "max_grad_norm": 1.0
+}
