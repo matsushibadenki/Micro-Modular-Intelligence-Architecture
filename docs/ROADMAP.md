@@ -21,7 +21,8 @@
 | [Done] | LoRA学習経路 MMIA-R002-P0 | LoRA training path | LoRA训练流程 | [結果](experiments/MMIA-R002-P0-results.md)：4 step、有限loss、540,672 trainable parameters、保存・再読込を確認 |
 | [Done] | 層化混合LoRA MMIA-R002-P1 | Stratified mixed-LoRA pilot | 分层混合LoRA试验 | [結果](experiments/MMIA-R002-P1-results.md)：72 stepを18.98秒で学習。探索validation 21.8→41.2% |
 | [Done] | 学習環境と本比較条件の固定 | Freeze training and comparison | 固定训练与对比条件 | [登録プロトコル](experiments/MMIA-R002-protocol.md)に依存版、同一token/update予算、3 seed、採否基準を固定 |
-| [Next] | 単一LoRA対専門LoRA MMIA-R002 | Single versus specialist adapters | 单适配器与专家适配器对比 | [seed 1結果](experiments/MMIA-R002-seed-20260915-results.md)：C2 50.46%、C1 48.84%、差+1.62pt（95% CI −0.93〜+4.40）。残り2 seedとC3を実行 |
+| [Done] | 単一LoRA対専門LoRA MMIA-R002 C1/C2 | Single versus specialist adapters | 单适配器与专家适配器对比 | [3-seed結果](experiments/MMIA-R002-results.md)：C2平均49.07%、C1 47.38%、差+1.70pt。主要CI +0.08〜+3.40、階層CI −0.93〜+4.86 |
+| [Next] | MMIA-R002 C3総容量対照 | Total-capacity mixed control | 总容量混合对照 | rank 32 Mixed LoRAを3 seed実行し、4専門家の総Adapter容量との関係を測る |
 | [Later] | request単位のroutingと合成 | Request routing and composition | 请求级路由与组合 | MMIA-R003〜R005で選択費用を含む改善を検証 |
 | [Later] | 大きいDenseとの比較 | Larger dense baseline | 较大稠密模型基线 | MMIA-R006で品質条件付き費用比較 |
 | [Later] | 安定知識・更新の比較 | Knowledge and update experiments | 知识与更新实验 | MMIA-R101〜R104でRAG、Memory、Hybridの回収条件を測定 |

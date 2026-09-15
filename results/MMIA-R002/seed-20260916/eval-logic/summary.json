@@ -1,0 +1,90 @@
+{
+  "all": {
+    "count": 108,
+    "correct": 108,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.1898402704991895,
+    "completion_p95_seconds": 0.25564225209955105,
+    "ttft_p50_seconds": 0.1475170004996471
+  },
+  "language/en": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.19921227100076067,
+    "completion_p95_seconds": 0.29258893725000235,
+    "ttft_p50_seconds": 0.1495778539992898
+  },
+  "language/ja": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.1950845629999094,
+    "completion_p95_seconds": 0.2408878542491948,
+    "ttft_p50_seconds": 0.15405297950019303
+  },
+  "language/zh": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.17921158300032403,
+    "completion_p95_seconds": 0.24194128175031437,
+    "ttft_p50_seconds": 0.13828024949998508
+  },
+  "domain/logic": {
+    "count": 108,
+    "correct": 108,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.1898402704991895,
+    "completion_p95_seconds": 0.25564225209955105,
+    "ttft_p50_seconds": 0.1475170004996471
+  },
+  "difficulty/easy": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.17392193699924974,
+    "completion_p95_seconds": 0.2277770630012128,
+    "ttft_p50_seconds": 0.1322133544999815
+  },
+  "difficulty/hard": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.2076753755000027,
+    "completion_p95_seconds": 0.2733043962498414,
+    "ttft_p50_seconds": 0.16504329149938712
+  },
+  "difficulty/medium": {
+    "count": 36,
+    "correct": 36,
+    "accuracy": 1.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.18178312450072553,
+    "completion_p95_seconds": 0.22291398924971872,
+    "ttft_p50_seconds": 0.14033787500011385
+  }
+}

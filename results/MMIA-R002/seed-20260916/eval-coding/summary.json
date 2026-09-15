@@ -1,0 +1,90 @@
+{
+  "all": {
+    "count": 108,
+    "correct": 23,
+    "accuracy": 0.21296296296296297,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.2253976869997132,
+    "completion_p95_seconds": 0.42454238969976327,
+    "ttft_p50_seconds": 0.13708750050045637
+  },
+  "language/en": {
+    "count": 36,
+    "correct": 7,
+    "accuracy": 0.19444444444444445,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.21322437500020897,
+    "completion_p95_seconds": 0.31733133299940164,
+    "ttft_p50_seconds": 0.12117627100087702
+  },
+  "language/ja": {
+    "count": 36,
+    "correct": 7,
+    "accuracy": 0.19444444444444445,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.25498397900082637,
+    "completion_p95_seconds": 0.40502322974998606,
+    "ttft_p50_seconds": 0.15031004150023364
+  },
+  "language/zh": {
+    "count": 36,
+    "correct": 9,
+    "accuracy": 0.25,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.2357108749993131,
+    "completion_p95_seconds": 0.4613516877498114,
+    "ttft_p50_seconds": 0.14044704150001053
+  },
+  "domain/coding": {
+    "count": 108,
+    "correct": 23,
+    "accuracy": 0.21296296296296297,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 108,
+    "completion_p50_seconds": 0.2253976869997132,
+    "completion_p95_seconds": 0.42454238969976327,
+    "ttft_p50_seconds": 0.13708750050045637
+  },
+  "difficulty/easy": {
+    "count": 36,
+    "correct": 23,
+    "accuracy": 0.6388888888888888,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.20060827099950984,
+    "completion_p95_seconds": 0.4151545419995273,
+    "ttft_p50_seconds": 0.11969739600044704
+  },
+  "difficulty/hard": {
+    "count": 36,
+    "correct": 0,
+    "accuracy": 0.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.23528766649997124,
+    "completion_p95_seconds": 0.4747902292501749,
+    "ttft_p50_seconds": 0.13950514599946473
+  },
+  "difficulty/medium": {
+    "count": 36,
+    "correct": 0,
+    "accuracy": 0.0,
+    "non_ok": 0,
+    "format_invalid": 0,
+    "successful_latency_count": 36,
+    "completion_p50_seconds": 0.23974687500049185,
+    "completion_p95_seconds": 0.3683266457501304,
+    "ttft_p50_seconds": 0.14480560399988462
+  }
+}

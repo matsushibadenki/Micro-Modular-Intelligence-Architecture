@@ -1,0 +1,12 @@
+{
+  "prediction": "4",
+  "token_ids": [
+    19,
+    151645
+  ],
+  "status": "ok",
+  "input_tokens": 36,
+  "output_tokens": 2,
+  "ttft_seconds": 0.2209638750009617,
+  "completion_seconds": 0.2574862090004899
+}

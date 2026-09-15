@@ -1,0 +1,15 @@
+{
+  "status": "completed",
+  "routing": "oracle domain label",
+  "dataset": "datasets/pilot-v2.jsonl",
+  "dataset_sha256": "9b2b13d2e561703b288156753df9ce4b3d0c80eccebb9bc79acf211dd1d88f11",
+  "split": "validation",
+  "example_count": 432,
+  "source_prediction_hashes": {
+    "math": "40bdf9621d6322d6b2ef2a5b8851f050835e52aed525b5ee87d447d21c5c2fc2",
+    "physics": "8e186e7944e89966cc0a37419b5e926cdd87b0336739b800ed71150cfc154f17",
+    "coding": "d6d880c28816f8be3c574cffafa7a0d032af4a7fc5b7654591b6688b14c87054",
+    "logic": "304c4571a80591004f03c9ef2549b0a24346bf8f51458eec73bfca170c50b76d"
+  },
+  "output_prediction_sha256": "069ece3216b95acfbf0068f7181625ab30db0c1c494cc77641c12c69ecf96546"
+}
